@@ -1,0 +1,185 @@
+/* Estilos para sección de contacto dividida */
+
+/* Contenedor principal horizontal */
+.contact-container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 3em;
+    align-items: stretch;
+    min-height: 70vh;
+}
+
+/* Sección de información (izquierda) */
+.contact-info {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.95);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(44,62,80,0.10);
+    padding: 2.5em 2em;
+}
+
+.info-content {
+    text-align: center;
+    width: 100%;
+}
+
+.contact-icon {
+    font-size: 3em;
+    color: #3cc6e0;
+    margin-bottom: 0.5em;
+    display: block;
+}
+
+.contact-info h3 {
+    font-size: 2em;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.5em;
+}
+
+.contact-desc {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 1.5em;
+    line-height: 1.6;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+    color: #3cc6e0;
+    font-weight: 600;
+    font-size: 1em;
+}
+
+.contact-item span:first-child {
+    color: #3cc6e0;
+}
+
+.contact-item span:last-child {
+    color: #555;
+}
+
+/* Sección del formulario (derecha) */
+.contact-form-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.95);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(44,62,80,0.10);
+    padding: 2.5em 2em;
+}
+
+/* Formulario */
+.contact-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+/* Campos del formulario */
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2em;
+    width: 100%;
+}
+
+.form-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.contact-form label {
+    font-weight: 600;
+    color: #3cc6e0;
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    font-size: 1em;
+}
+
+.contact-form input, 
+.contact-form textarea {
+    padding: 1em;
+    border: 1.5px solid #eaf6fb;
+    border-radius: 8px;
+    font-size: 1em;
+    font-family: 'Poppins', 'Roboto', Arial, sans-serif;
+    background: #f7fbfc;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.contact-form input:focus, 
+.contact-form textarea:focus {
+    border-color: #3cc6e0;
+    box-shadow: 0 2px 12px rgba(44,62,80,0.10);
+    outline: none;
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Botón de envío */
+.cta-form {
+    background: #3cc6e0;
+    color: #fff;
+    padding: 1em 2em;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1em;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(44,62,80,0.12);
+    transition: background 0.3s, transform 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1em;
+}
+
+.cta-form:hover {
+    background: #2bb3c0;
+    transform: translateY(-2px) scale(1.03);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .contact-container {
+        flex-direction: column;
+        gap: 2em;
+        min-height: auto;
+    }
+    
+    .contact-info, .contact-form-section {
+        padding: 2em 1.5em;
+    }
+    
+    .contact-details {
+        align-items: flex-start;
+    }
+}
