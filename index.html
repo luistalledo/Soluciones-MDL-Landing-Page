@@ -10,6 +10,20 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Barra lateral flotante de redes sociales -->
+    <div class="floating-social">
+        <div class="social-title">Síguenos</div>
+        <a href="https://www.facebook.com/profile.php?id=61581013543284" target="_blank" rel="noopener" class="floating-social-link facebook" title="Facebook">
+            <span class="material-icons">facebook</span>
+        </a>
+        <a href="https://www.instagram.com/mld.soluciones/" target="_blank" rel="noopener" class="floating-social-link instagram" title="Instagram">
+            <span class="material-icons">camera_alt</span>
+        </a>
+        <a href="mailto:mldsolucionescontacto@gmail.com" class="floating-social-link email" title="Email">
+            <span class="material-icons">mail</span>
+        </a>
+    </div>
+
     <div class="snap-container">
         <!-- Encabezado Hero -->
         <header class="hero hero-bg section-full">
@@ -18,26 +32,89 @@
                     <img src="img/logo.png" alt="Logo MLD Soluciones" class="logo-img">
                     <span class="logo-text">MLD Soluciones</span>
                 </div>
-                <a href="#contacto" class="cta-nav">Solicita una asesoría gratuita</a>
+                <div class="nav-right">
+                    <div class="nav-social">
+                        <a href="https://www.facebook.com/profile.php?id=61581013543284" target="_blank" rel="noopener" class="nav-social-link" title="Síguenos en Facebook">
+                            <span class="material-icons">facebook</span>
+                        </a>
+                        <a href="https://www.instagram.com/mld.soluciones/" target="_blank" rel="noopener" class="nav-social-link" title="Síguenos en Instagram">
+                            <span class="material-icons">camera_alt</span>
+                        </a>
+                    </div>
+                    <a href="#contacto" class="cta-nav">Solicita una asesoría gratuita</a>
+                </div>
             </nav>
             <div class="hero-content">
                 <h1 class="hero-title animate-zoom">Impulsamos tu negocio<br>con <span class="highlight">tecnología e innovación</span></h1>
                 <p class="hero-sub animate-fade">Consultoría tecnológica, desarrollo de software y automatización para empresas que quieren crecer.</p>
                 <a href="#contacto" class="cta-main cta-hero animate-bounce">Solicita una asesoría gratuita</a>
+                
+                <div class="hero-social animate-fade">
+                    <span class="hero-social-text">Síguenos y mantente actualizado:</span>
+                    <div class="hero-social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61581013543284" target="_blank" rel="noopener" class="hero-social-link facebook" title="Facebook">
+                            <span class="material-icons">facebook</span>
+                            <span class="social-name">Facebook</span>
+                        </a>
+                        <a href="https://www.instagram.com/mld.soluciones/" target="_blank" rel="noopener" class="hero-social-link instagram" title="Instagram">
+                            <span class="material-icons">camera_alt</span>
+                            <span class="social-name">Instagram</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </header>
         <!-- Sobre Nosotros -->
         <section class="about section-bg1 section-full">
-            <h2>¿Quiénes somos?</h2>
-            <p>MLD Soluciones es una empresa de consultoría tecnológica que ayuda a negocios a crecer mediante soluciones integrales de software, automatización e inteligencia artificial. Nos diferenciamos por nuestro enfoque innovador, accesible y personalizado para cada cliente.</p>
-            <div class="about-cards">
-                <div class="about-card">
-                    <h3>Visión</h3>
-                    <p>Transformar empresas tradicionales en negocios digitales modernos y competitivos.</p>
+            <div class="about-container">
+                <div class="about-left">
+                    <h2>¿Quiénes somos?</h2>
+                    <div class="about-description">
+                        <p>En <strong>MLD Soluciones</strong> somos una empresa dedicada a impulsar el crecimiento de negocios a través de soluciones tecnológicas innovadoras y personalizadas. Nos especializamos en el desarrollo de software, transformación digital y estrategias tecnológicas que optimizan procesos, reducen costos y aumentan la eficiencia operativa de las empresas.</p>
+                        
+                        <p>Nuestro objetivo es convertir la tecnología en una herramienta accesible y estratégica para nuestros clientes, brindando servicios que se adaptan a sus necesidades y visión de crecimiento. Contamos con un equipo de profesionales apasionados por la innovación, que trabaja con los más altos estándares de calidad y compromiso.</p>
+                        
+                        <p>En MLD Soluciones creemos que cada negocio es único, por eso ofrecemos soluciones escalables y seguras que permiten a nuestros clientes enfrentar los retos del presente y prepararse para el futuro digital.</p>
+                    </div>
                 </div>
-                <div class="about-card">
-                    <h3>Misión</h3>
-                    <p>Brindar soluciones tecnológicas innovadoras y accesibles que optimicen procesos, reduzcan costos y mejoren la experiencia del cliente.</p>
+                
+                <div class="about-right">
+                    <div class="image-carousel">
+                        <div class="carousel-container">
+                            <div class="carousel-slide active">
+                                <img src="img/desarrolloweb.png" alt="Desarrollo de Software" class="carousel-image">
+                                <div class="carousel-caption">
+                                    <h4>Desarrollo de Software</h4>
+                                    <p>Soluciones tecnológicas innovadoras</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="img/transformaciondigital.jpg" alt="Transformación Digital" class="carousel-image">
+                                <div class="carousel-caption">
+                                    <h4>Transformación Digital</h4>
+                                    <p>Moderniza tu empresa con tecnología</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="img/consultoriatecnologia.png" alt="Consultoría Tecnológica" class="carousel-image">
+                                <div class="carousel-caption">
+                                    <h4>Consultoría Tecnológica</h4>
+                                    <p>Estrategias para el crecimiento</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Controles del carrusel -->
+                        <button class="carousel-btn carousel-prev" onclick="prevSlide()">‹</button>
+                        <button class="carousel-btn carousel-next" onclick="nextSlide()">›</button>
+                        
+                        <!-- Indicadores -->
+                        <div class="carousel-indicators">
+                            <span class="indicator active" onclick="currentSlide(1)"></span>
+                            <span class="indicator" onclick="currentSlide(2)"></span>
+                            <span class="indicator" onclick="currentSlide(3)"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -183,7 +260,7 @@
                 <p>WhatsApp: +51 987 654 321</p>
                 <div class="footer-social">
                     <a href="https://www.facebook.com/profile.php?id=61581013543284"><span class="material-icons">facebook</span></a>
-                    <a href="https://www.linkedin.com/company/mld-soluciones"><span class="material-icons">linkedin</span></a>
+                    <a href="https://www.instagram.com/mld.soluciones/" target="_blank" rel="noopener"><span class="material-icons">camera_alt</span></a>
                     <a href="mailto:mldsolucionescontacto@gmail.com"><span class="material-icons">mail</span></a>
                 </div>
             </div>

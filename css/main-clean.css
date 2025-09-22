@@ -91,7 +91,7 @@ html {
 /* Navbar - Color fijo azul */
 .navbar {
     display: flex !important;
-    justify-content: flex-start !important;
+    justify-content: space-between !important;
     align-items: center !important;
     padding: 1.5em 2em !important;
     background: rgba(60, 198, 224, 1) !important;
@@ -106,6 +106,7 @@ html {
     border-bottom: 1.5px solid rgba(255,255,255,0.2) !important;
     visibility: visible !important;
     opacity: 1 !important;
+    box-sizing: border-box;
 }
 
 .navbar .logo {
@@ -455,6 +456,8 @@ html {
         flex-direction: column;
         gap: 1em;
         padding: 1em;
+        height: auto !important;
+        min-height: 80px;
     }
     .logo-img {
         height: 36px;
@@ -561,4 +564,601 @@ nav.navbar {
     opacity: 1 !important;
     visibility: visible !important;
     text-align: center !important;
+}
+
+/* ===========================================
+   ESTILOS PARA REDES SOCIALES MEJORADAS
+   =========================================== */
+
+/* Navbar con redes sociales */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5em;
+}
+
+.nav-social {
+    display: flex;
+    gap: 1em;
+}
+
+.nav-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.nav-social-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.nav-social-link .material-icons {
+    font-size: 20px;
+}
+
+/* Barra lateral flotante de redes sociales */
+.floating-social {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 15px;
+    background: rgba(44, 62, 80, 0.95);
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.social-title {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    font-weight: 600;
+    font-size: 12px;
+    color: #ffffff;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.floating-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.floating-social-link.facebook {
+    background: linear-gradient(135deg, #1877f2, #42a5f5);
+}
+
+.floating-social-link.instagram {
+    background: linear-gradient(135deg, #e91e63, #f06292, #ff9800);
+}
+
+
+
+.floating-social-link.email {
+    background: linear-gradient(135deg, #34495e, #5d6d7e);
+}
+
+.floating-social-link:hover {
+    transform: translateX(-8px) scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.floating-social-link .material-icons {
+    font-size: 22px;
+}
+
+/* Redes sociales en el hero */
+.hero-social {
+    margin-top: 3em;
+    text-align: center;
+}
+
+.hero-social-text {
+    display: block;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1.5em;
+    font-weight: 400;
+}
+
+.hero-social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    flex-wrap: wrap;
+}
+
+.hero-social-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+    padding: 1.5em 1em;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    min-width: 120px;
+}
+
+.hero-social-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.hero-social-link .material-icons {
+    font-size: 28px;
+}
+
+.social-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Estilos responsivos para redes sociales */
+@media (max-width: 768px) {
+    .nav-right {
+        flex-direction: column;
+        gap: 1em;
+    }
+    
+    .nav-social {
+        order: -1;
+    }
+    
+    .floating-social {
+        right: 15px;
+        padding: 15px 10px;
+    }
+    
+    .social-title {
+        font-size: 10px;
+    }
+    
+    .floating-social-link {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .floating-social-link .material-icons {
+        font-size: 20px;
+    }
+    
+    .hero-social-links {
+        gap: 1em;
+    }
+    
+    .hero-social-link {
+        min-width: 100px;
+        padding: 1em 0.5em;
+    }
+    
+    .hero-social-link .material-icons {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .floating-social {
+        right: 10px;
+        padding: 10px 8px;
+    }
+    
+    .floating-social-link {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .floating-social-link .material-icons {
+        font-size: 18px;
+    }
+    
+    .hero-social-text {
+        font-size: 14px;
+    }
+    
+    .hero-social-links {
+        flex-direction: column;
+        gap: 1em;
+    }
+    
+    .hero-social-link {
+        min-width: auto;
+    }
+}
+
+/* ===========================================
+   ESTILOS PARA NUEVA SECCIÓN ABOUT
+   =========================================== */
+
+/* SOBRESCRIBIR estilos conflictivos para la nueva estructura */
+.section-bg1 .about-container {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.section-bg1 .about-left,
+.section-bg1 .about-right {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+.section-bg1 .about-description p {
+    opacity: 1 !important;
+    visibility: visible !important;
+    text-align: justify !important;
+}
+
+/* Asegurar que el h2 también sea visible */
+.section-bg1 .about-left h2 {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+/* Sobrescribir estilos de about-cards antiguos */
+.section-bg1 .about-cards {
+    display: none !important;
+}
+
+/* Sobrescribir padding y text-align de la sección general */
+.about.section-bg1 {
+    padding: 4em 2em 2em 2em !important;
+    text-align: left !important;
+}
+
+/* FORZAR VISIBILIDAD de todos los elementos */
+.section-bg1 .about-container,
+.section-bg1 .about-left,
+.section-bg1 .about-right,
+.section-bg1 .about-description,
+.section-bg1 .about-description p,
+.section-bg1 .about-left h2 {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.section-bg1 .about-container {
+    display: flex !important;
+}
+
+.section-bg1 .about-left h2 {
+    color: #ffffff !important;
+}
+
+/* Ajustar la línea decorativa del título para que esté centrada debajo del texto */
+.about-left h2::after {
+    left: 25% !important;
+    transform: translateX(-50%) !important;
+    margin-left: 0 !important;
+    position: absolute;
+    bottom: -10px;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #3cc6e0, transparent);
+    border-radius: 2px;
+    animation: underlineGlow 2s ease-in-out infinite;
+}
+
+/* DESACTIVAR animaciones y transforms que desplazan el contenido */
+.section-bg1 .about-container,
+.section-bg1 .about-left,
+.section-bg1 .about-right,
+.section-bg1 .about-description {
+    transform: none !important;
+    transform-origin: initial !important;
+    left: initial !important;
+    right: initial !important;
+    margin-left: initial !important;
+    margin-right: initial !important;
+    position: relative !important;
+    animation: none !important;
+}
+
+.section-bg1 .about-left {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.section-bg1 .about-right {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Contenedor principal de la sección about */
+.about-container {
+    display: flex !important;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto !important;
+    gap: 6em;
+    align-items: flex-start;
+    padding: 2em 0;
+    transform: none !important;
+    animation: none !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+}
+
+/* Lado izquierdo - Quiénes somos */
+.about-left {
+    flex: 1.5;
+    padding-right: 3em;
+    transform: none !important;
+    animation: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+}
+
+.about-left h2 {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1.5em;
+    text-align: left;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.about-description p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 1.5em;
+    text-align: justify;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.about-description p strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Lado derecho - Carrusel de imágenes */
+.about-right {
+    flex: 0.9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 2em;
+    padding-left: 2em;
+}
+
+/* Contenedor del carrusel */
+.image-carousel {
+    position: relative;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    max-width: 500px;
+    min-height: 450px;
+    margin: 8em auto 0 auto;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+}
+
+.carousel-image {
+    width: 100%;
+    height: 75%;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0;
+}
+
+.carousel-caption {
+    padding: 1em;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.98);
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.carousel-caption h4 {
+    margin: 0 0 0.5em 0;
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.carousel-caption p {
+    margin: 0;
+    font-size: 1em;
+    color: #5a6c7d;
+    line-height: 1.4;
+}
+
+/* Botones de navegación */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(60, 198, 224, 0.9);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-btn:hover {
+    background: rgba(60, 198, 224, 1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-prev {
+    left: 10px;
+}
+
+.carousel-next {
+    right: 10px;
+}
+
+/* Indicadores */
+.carousel-indicators {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.indicator.active,
+.indicator:hover {
+    background: rgba(60, 198, 224, 0.9);
+}
+
+
+
+/* Estilos responsivos para la nueva sección about */
+@media (max-width: 968px) {
+    .about-container {
+        flex-direction: column;
+        gap: 2em;
+    }
+    
+    .about-left {
+        padding-right: 0;
+    }
+    
+    .about-left h2 {
+        text-align: center;
+        font-size: 2.2em;
+    }
+    
+    .about-description p {
+        text-align: left;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-container {
+        padding: 1em 0;
+    }
+    
+    .about-left h2 {
+        font-size: 1.8em;
+        margin-bottom: 1em;
+    }
+    
+    .about-description p {
+        font-size: 1em;
+        margin-bottom: 1.2em;
+    }
+    
+    .vision-card, .mission-card {
+        padding: 1.8em 1.5em;
+    }
+    
+    .card-icon {
+        font-size: 2em;
+    }
+    
+    .vision-card h3, .mission-card h3 {
+        font-size: 1.2em;
+    }
+    
+    /* Carrusel responsivo */
+    .image-carousel {
+        width: 100%;
+    }
+    
+    .carousel-caption {
+        padding: 1em;
+        bottom: 0;
+    }
+    
+    .carousel-caption h4 {
+        font-size: 1em;
+    }
+    
+    .carousel-caption p {
+        font-size: 0.9em;
+    }
+    
+    .carousel-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
 }
