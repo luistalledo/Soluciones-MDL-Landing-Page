@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>MLD Soluciones | Consultoría y Transformación Digital</title>
+    <meta name="description" content="MLD Soluciones: consultoría tecnológica, desarrollo de software, automatización e inteligencia artificial para empresas modernas. Solicita tu asesoría gratuita.">
+    <link rel="stylesheet" href="css/mobile.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar móvil -->
+    <nav class="mobile-navbar">
+        <div class="mobile-logo">
+            <img src="img/logo.png" alt="Logo MLD Soluciones" class="mobile-logo-img">
+            <span class="mobile-logo-text">MLD Soluciones</span>
+        </div>
+        <div class="mobile-social">
+            <a href="https://www.facebook.com/profile.php?id=61581013543284" target="_blank" class="mobile-social-link">
+                <span class="material-icons">facebook</span>
+            </a>
+            <a href="https://www.instagram.com/mld.soluciones/" target="_blank" class="mobile-social-link">
+                <span class="material-icons">camera_alt</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="mobile-hero">
+        <div class="mobile-hero-content">
+            <h1 class="mobile-hero-title">Impulsamos tu negocio con <span class="mobile-highlight">tecnología e innovación</span></h1>
+            <p class="mobile-hero-sub">Consultoría tecnológica, desarrollo de software y automatización para empresas que quieren crecer.</p>
+            <a href="#contacto-mobile" class="mobile-cta">Solicita una asesoría gratuita</a>
+        </div>
+    </section>
+
+    <!-- Quiénes Somos Móvil -->
+    <section class="mobile-about">
+        <div class="mobile-about-container">
+            <h2 class="mobile-section-title">¿Quiénes somos?</h2>
+            
+            <div class="mobile-about-content">
+                <p>En <strong>MLD Soluciones</strong> somos una empresa dedicada a impulsar el crecimiento de negocios a través de soluciones tecnológicas innovadoras y personalizadas.</p>
+                
+                <p>Nos especializamos en el desarrollo de software, transformación digital y estrategias tecnológicas que optimizan procesos, reducen costos y aumentan la eficiencia operativa de las empresas.</p>
+                
+                <p>Nuestro objetivo es convertir la tecnología en una herramienta accesible y estratégica para nuestros clientes, brindando servicios que se adaptan a sus necesidades y visión de crecimiento.</p>
+            </div>
+
+            <!-- Carrusel Móvil -->
+            <div class="mobile-carousel">
+                <h3 class="mobile-carousel-title">Nuestros Proyectos</h3>
+                <div class="mobile-carousel-container">
+                    <div class="mobile-carousel-track" id="mobileCarouselTrack">
+                        <div class="mobile-slide active">
+                            <img src="img/seccion1.png" alt="Desarrollo de Software" class="mobile-slide-img">
+                            <div class="mobile-slide-info">
+                                <h4>Desarrollo de Software</h4>
+                                <p>Soluciones tecnológicas innovadoras</p>
+                            </div>
+                        </div>
+                        <div class="mobile-slide">
+                            <img src="img/seccion2.png" alt="Transformación Digital" class="mobile-slide-img">
+                            <div class="mobile-slide-info">
+                                <h4>Transformación Digital</h4>
+                                <p>Moderniza tu empresa con tecnología</p>
+                            </div>
+                        </div>
+                        <div class="mobile-slide">
+                            <img src="img/seccion3.png" alt="Consultoría Tecnológica" class="mobile-slide-img">
+                            <div class="mobile-slide-info">
+                                <h4>Consultoría Tecnológica</h4>
+                                <p>Estrategias para el crecimiento</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mobile-carousel-controls">
+                        <button class="mobile-carousel-btn mobile-prev" onclick="mobilePrevSlide()">‹</button>
+                        <button class="mobile-carousel-btn mobile-next" onclick="mobileNextSlide()">›</button>
+                    </div>
+                    <div class="mobile-carousel-dots">
+                        <span class="mobile-dot active" onclick="mobileCurrentSlide(1)"></span>
+                        <span class="mobile-dot" onclick="mobileCurrentSlide(2)"></span>
+                        <span class="mobile-dot" onclick="mobileCurrentSlide(3)"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios Móvil -->
+    <section class="mobile-services">
+        <h2 class="mobile-section-title">Servicios principales</h2>
+        <div class="mobile-services-list">
+            <div class="mobile-service-item">
+                <span class="material-icons mobile-service-icon">code</span>
+                <h3>Desarrollo de software a medida</h3>
+                <p>Creamos aplicaciones web, móviles y de escritorio adaptadas a tus necesidades específicas.</p>
+            </div>
+            <div class="mobile-service-item">
+                <span class="material-icons mobile-service-icon">auto_awesome</span>
+                <h3>Automatización de procesos</h3>
+                <p>Optimizamos tus operaciones con herramientas de automatización inteligente.</p>
+            </div>
+            <div class="mobile-service-item">
+                <span class="material-icons mobile-service-icon">psychology</span>
+                <h3>Inteligencia artificial</h3>
+                <p>Implementamos soluciones de IA para mejorar la toma de decisiones en tu empresa.</p>
+            </div>
+            <div class="mobile-service-item">
+                <span class="material-icons mobile-service-icon">cloud</span>
+                <h3>Migración a la nube</h3>
+                <p>Te ayudamos a migrar y optimizar tus sistemas en plataformas cloud modernas y seguras.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto Móvil -->
+    <section class="mobile-contact" id="contacto-mobile">
+        <h2 class="mobile-section-title">Solicita información</h2>
+        
+        <div class="mobile-contact-info">
+            <div class="mobile-contact-item">
+                <span class="material-icons">email</span>
+                <span>mldsolucionescontacto@gmail.com</span>
+            </div>
+            <div class="mobile-contact-item">
+                <span class="material-icons">phone</span>
+                <span>+51 987 654 321</span>
+            </div>
+            <div class="mobile-contact-item">
+                <span class="material-icons">schedule</span>
+                <span>Respuesta en menos de 24 horas</span>
+            </div>
+        </div>
+
+        <form class="mobile-contact-form" action="https://formspree.io/f/xanpwwoe" method="POST">
+            <div class="mobile-form-group">
+                <label for="mobile-nombre">
+                    <span class="material-icons">person</span>
+                    Nombre
+                </label>
+                <input type="text" id="mobile-nombre" name="nombre" required placeholder="Tu Nombre">
+            </div>
+            
+            <div class="mobile-form-group">
+                <label for="mobile-telefono">
+                    <span class="material-icons">phone</span>
+                    Teléfono
+                </label>
+                <input type="tel" id="mobile-telefono" name="telefono" placeholder="Tu Teléfono">
+            </div>
+            
+            <div class="mobile-form-group">
+                <label for="mobile-email">
+                    <span class="material-icons">email</span>
+                    Correo
+                </label>
+                <input type="email" id="mobile-email" name="email" required placeholder="Tu Correo">
+            </div>
+            
+            <div class="mobile-form-group">
+                <label for="mobile-message">
+                    <span class="material-icons">message</span>
+                    Mensaje
+                </label>
+                <textarea id="mobile-message" name="message" required placeholder="Escribe tu mensaje"></textarea>
+            </div>
+            
+            <button type="submit" class="mobile-submit-btn">
+                <span class="material-icons">send</span>
+                Solicitar información
+            </button>
+        </form>
+    </section>
+
+    <!-- Footer Móvil -->
+    <footer class="mobile-footer">
+        <div class="mobile-footer-content">
+            <div class="mobile-footer-logo">
+                <img src="img/logo.png" alt="Logo MLD Soluciones">
+                <span>MLD Soluciones</span>
+            </div>
+            <div class="mobile-footer-social">
+                <a href="https://www.facebook.com/profile.php?id=61581013543284" target="_blank">
+                    <span class="material-icons">facebook</span>
+                </a>
+                <a href="https://www.instagram.com/mld.soluciones/" target="_blank">
+                    <span class="material-icons">camera_alt</span>
+                </a>
+                <a href="mailto:mldsolucionescontacto@gmail.com">
+                    <span class="material-icons">mail</span>
+                </a>
+            </div>
+            <p class="mobile-footer-copy">&copy; 2025 MLD Soluciones. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/mobile.js"></script>
+</body>
+</html>
