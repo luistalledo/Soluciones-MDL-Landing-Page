@@ -98,94 +98,88 @@
         }
     }
     
-    // Función para crear botón de cambio de versión
-    function createVersionSwitcher() {
+    // Función para crear botón de scroll to top
+    function createScrollToTopButton() {
         // Solo crear en la versión desktop
         if (isOnMobilePage()) {
             return;
         }
         
-        // NO crear el botón si ya estamos en un dispositivo móvil
-        // (porque debería haberse redirigido automáticamente)
-        if (isMobileDevice() && !isDesktopForced()) {
-            return;
-        }
-        
-        // Crear botón para cambiar a móvil
-        const switcherButton = document.createElement('button');
-        switcherButton.setAttribute('data-mobile-switcher', 'true');
-        switcherButton.innerHTML = `
-            <i class="material-icons">smartphone</i>
-            <span>Ver versión móvil</span>
+        // Crear botón para volver arriba
+        const scrollButton = document.createElement('button');
+        scrollButton.setAttribute('data-scroll-top', 'true');
+        scrollButton.innerHTML = `
+            <i class="material-icons">keyboard_arrow_up</i>
         `;
+        scrollButton.title = 'Volver al inicio';
         
-        // Estilos del botón
-        switcherButton.style.cssText = `
+        // Estilos del botón scroll to top
+        scrollButton.style.cssText = `
             position: fixed;
             bottom: 20px;
             right: 20px;
             background: linear-gradient(135deg, #3cc6e0, #42a5f5);
             color: white;
             border: none;
-            border-radius: 25px;
-            padding: 12px 16px;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
             font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-            font-weight: 500;
             cursor: pointer;
             z-index: 1000;
             box-shadow: 0 4px 15px rgba(60, 198, 224, 0.3);
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 8px;
-            opacity: 0.8;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(20px);
         `;
         
-        // Efectos hover
-        switcherButton.addEventListener('mouseenter', function() {
-            this.style.opacity = '1';
-            this.style.transform = 'translateY(-2px)';
-            this.style.boxShadow = '0 6px 20px rgba(60, 198, 224, 0.4)';
-        });
-        
-        switcherButton.addEventListener('mouseleave', function() {
-            this.style.opacity = '0.8';
-            this.style.transform = 'translateY(0)';
-            this.style.boxShadow = '0 4px 15px rgba(60, 198, 224, 0.3)';
-        });
-        
-        // Click handler
-        switcherButton.addEventListener('click', function() {
-            const currentParams = window.location.search;
-            const hash = window.location.hash;
-            let mobileURL = window.location.pathname.replace('index.html', 'index-mobile.html');
-            
-            if (mobileURL === '/' || mobileURL.endsWith('/')) {
-                mobileURL += 'index-mobile.html';
-            }
-            
-            window.location.href = mobileURL + currentParams + hash;
-        });
-        
-        // Agregar al DOM
-        document.body.appendChild(switcherButton);
-        
-        // Ocultar en pantallas muy pequeñas (ya serían móviles) y en dispositivos táctiles
-        function toggleVisibility() {
-            const isSmallScreen = window.innerWidth <= 768;
-            const isTouchDevice = 'ontouchstart' in window;
-            const shouldHide = isSmallScreen || (isTouchDevice && window.innerWidth <= 1024);
-            
-            if (shouldHide) {
-                switcherButton.style.display = 'none';
+        // Mostrar/ocultar según scroll
+        function toggleScrollButton() {
+            if (window.scrollY > 300) {
+                scrollButton.style.opacity = '0.8';
+                scrollButton.style.transform = 'translateY(0)';
             } else {
-                switcherButton.style.display = 'flex';
+                scrollButton.style.opacity = '0';
+                scrollButton.style.transform = 'translateY(20px)';
             }
         }
         
-        toggleVisibility();
-        window.addEventListener('resize', toggleVisibility);
+        // Efectos hover
+        scrollButton.addEventListener('mouseenter', function() {
+            if (window.scrollY > 300) {
+                this.style.opacity = '1';
+                this.style.transform = 'translateY(-2px) scale(1.1)';
+                this.style.boxShadow = '0 6px 20px rgba(60, 198, 224, 0.4)';
+            }
+        });
+        
+        scrollButton.addEventListener('mouseleave', function() {
+            if (window.scrollY > 300) {
+                this.style.opacity = '0.8';
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = '0 4px 15px rgba(60, 198, 224, 0.3)';
+            }
+        });
+        
+        // Click handler - scroll to top
+        scrollButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Agregar al DOM
+        document.body.appendChild(scrollButton);
+        
+        // Escuchar scroll para mostrar/ocultar
+        window.addEventListener('scroll', toggleScrollButton);
+        
+        // Verificación inicial
+        toggleScrollButton();
     }
     
     // Función para crear switcher en móvil (a desktop)
@@ -259,23 +253,23 @@
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function() {
             handleMobileRedirection();
-            createVersionSwitcher();
+            createScrollToTopButton();
             createDesktopSwitcher();
         });
     } else {
         handleMobileRedirection();
-        createVersionSwitcher();
+        createScrollToTopButton();
         createDesktopSwitcher();
     }
     
     // También ejecutar inmediatamente para redirecciones rápidas
     handleMobileRedirection();
     
-    // Función para limpiar botón móvil si se detecta que ya no es necesario
-    function cleanupMobileSwitcher() {
+    // Función para limpiar botón scroll si se detecta que ya no es necesario
+    function cleanupScrollButton() {
         if (!isOnMobilePage() && isMobileDevice() && !isDesktopForced()) {
             // Remover botón si existe
-            const existingButton = document.querySelector('button[data-mobile-switcher]');
+            const existingButton = document.querySelector('button[data-scroll-top]');
             if (existingButton) {
                 existingButton.remove();
             }
@@ -289,7 +283,7 @@
     
     // Monitorear cambios de ventana
     window.addEventListener('resize', function() {
-        setTimeout(cleanupMobileSwitcher, 300);
+        setTimeout(cleanupScrollButton, 300);
     });
     
     // Limpiar forzado de desktop después de 24 horas
