@@ -1013,12 +1013,13 @@ nav.navbar {
     height: 100%;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
-    display: flex;
+    display: none;
     flex-direction: column;
 }
 
 .carousel-slide.active {
     opacity: 1;
+    display: block;
 }
 
 .carousel-image {
@@ -1032,7 +1033,7 @@ nav.navbar {
     padding: 1em;
     text-align: center;
     background: rgba(255, 255, 255, 0.98);
-    height: 30%;
+    height: 10%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1043,6 +1044,15 @@ nav.navbar {
     font-size: 1.4em;
     font-weight: 600;
     color: #2c3e50;
+    
+}
+
+.carousel-caption h6 {
+    margin: 0 0 0.5em 0;
+    font-size: 1.0em;
+    font-weight: 600;
+    color: #48505886;
+    
 }
 
 .carousel-caption p {
@@ -1103,7 +1113,7 @@ nav.navbar {
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.5);
     cursor: pointer;
-    transition: all 0.3s ease;
+    
 }
 
 .indicator.active,
