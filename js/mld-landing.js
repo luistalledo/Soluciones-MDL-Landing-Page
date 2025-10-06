@@ -99,4 +99,43 @@ if (carouselContainer) {
 // Inicializar carrusel
 document.addEventListener('DOMContentLoaded', () => {
     showSlide(0);
+    
+    // Inicializar tema (por defecto oscuro)
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    applyTheme(savedTheme);
 });
+
+// ========================================
+// SISTEMA DE TEMAS CLARO/OSCURO
+// ========================================
+
+function toggleTheme() {
+    const body = document.body;
+    const themeIcon = document.getElementById('theme-icon');
+    const isLightTheme = body.classList.contains('light-theme');
+    
+    if (isLightTheme) {
+        // Cambiar a tema oscuro
+        body.classList.remove('light-theme');
+        themeIcon.textContent = 'light_mode';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        // Cambiar a tema claro
+        body.classList.add('light-theme');
+        themeIcon.textContent = 'dark_mode';
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+function applyTheme(theme) {
+    const body = document.body;
+    const themeIcon = document.getElementById('theme-icon');
+    
+    if (theme === 'light') {
+        body.classList.add('light-theme');
+        if (themeIcon) themeIcon.textContent = 'dark_mode';
+    } else {
+        body.classList.remove('light-theme');
+        if (themeIcon) themeIcon.textContent = 'light_mode';
+    }
+}
