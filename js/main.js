@@ -46,6 +46,29 @@
     lenis.on('scroll', handleNavbarScroll);
 
     // ═══════════════════════════════════════════
+    // SCROLL TO TOP BUTTON
+    // ═══════════════════════════════════════════
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    
+    function handleScrollToTopVisibility() {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 400) {
+            scrollToTopBtn.classList.add('visible');
+        } else {
+            scrollToTopBtn.classList.remove('visible');
+        }
+    }
+    
+    lenis.on('scroll', handleScrollToTopVisibility);
+    
+    scrollToTopBtn.addEventListener('click', function() {
+        lenis.scrollTo('top', {
+            duration: 1.5
+        });
+    });
+
+    // ═══════════════════════════════════════════
     // INTERSECTION OBSERVER FOR SCROLL REVEAL
     // ═══════════════════════════════════════════
     const observerOptions = {
