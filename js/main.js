@@ -64,6 +64,7 @@
     
     scrollToTopBtn.addEventListener('click', function() {
         const isMobile = window.innerWidth <= 768;
+        lenis.stop(); // Detener cualquier scroll en progreso
         lenis.scrollTo('top', {
             duration: isMobile ? 0.4 : 1.5
         });
