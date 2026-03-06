@@ -65,7 +65,7 @@
     scrollToTopBtn.addEventListener('click', function() {
         const isMobile = window.innerWidth <= 768;
         lenis.scrollTo('top', {
-            duration: isMobile ? 0.8 : 1.5
+            duration: isMobile ? 0.4 : 1.5
         });
     });
 
