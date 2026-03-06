@@ -71,7 +71,7 @@
         window.scrollTo(0, window.pageYOffset);
         
         lenis.scrollTo('top', {
-            duration: isMobile ? 0.4 : 1.5,
+            duration: isMobile ? 0 : 1.5,
             force: true,
             lock: true
         });
@@ -118,9 +118,10 @@
             const target = document.querySelector(href);
             if (target) {
                 e.preventDefault();
+                const isMobile = window.innerWidth <= 768;
                 lenis.scrollTo(target, {
                     offset: -68,
-                    duration: 1.5
+                    duration: isMobile ? 0 : 1.5
                 });
             }
         });
@@ -136,10 +137,11 @@
         if (window.location.hash) {
             const target = document.querySelector(window.location.hash);
             if (target) {
+                const isMobile = window.innerWidth <= 768;
                 setTimeout(() => {
                     lenis.scrollTo(target, {
                         offset: -68,
-                        duration: 1.5
+                        duration: isMobile ? 0 : 1.5
                     });
                 }, 100);
             }
