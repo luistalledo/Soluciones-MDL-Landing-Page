@@ -62,11 +62,12 @@
     
     lenis.on('scroll', handleScrollToTopVisibility);
     
-    scrollToTopBtn.addEventListener('click', function() {
+    scrollToTopBtn.addEventListener('click', function(e) {
+        e.preventDefault();
         const isMobile = window.innerWidth <= 768;
-        lenis.stop(); // Detener cualquier scroll en progreso
         lenis.scrollTo('top', {
-            duration: isMobile ? 0.4 : 1.5
+            duration: isMobile ? 0.4 : 1.5,
+            force: true
         });
     });
 
