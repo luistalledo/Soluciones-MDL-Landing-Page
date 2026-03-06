@@ -62,14 +62,23 @@
     
     lenis.on('scroll', handleScrollToTopVisibility);
     
-    scrollToTopBtn.addEventListener('click', function(e) {
+    function handleScrollToTop(e) {
         e.preventDefault();
+        e.stopPropagation();
         const isMobile = window.innerWidth <= 768;
+        
+        // Force stop any ongoing scroll
+        window.scrollTo(0, window.pageYOffset);
+        
         lenis.scrollTo('top', {
             duration: isMobile ? 0.4 : 1.5,
-            force: true
+            force: true,
+            lock: true
         });
-    });
+    }
+    
+    scrollToTopBtn.addEventListener('click', handleScrollToTop);
+    scrollToTopBtn.addEventListener('touchend', handleScrollToTop);
 
     // ═══════════════════════════════════════════
     // INTERSECTION OBSERVER FOR SCROLL REVEAL
