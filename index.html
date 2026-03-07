@@ -2,14 +2,20 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MLD Soluciones</title>
-    <meta name="description" content="MLD Soluciones: consultoría tecnológica, desarrollo de software, automatización e inteligencia artificial para empresas modernas. Solicita tu asesoría gratuita.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>NELVOX</title>
+    <meta name="description" content="NELVOX: consultoría tecnológica, desarrollo de software, automatización e inteligencia artificial para empresas modernas. Solicita tu asesoría gratuita.">
+    
+    <!-- Mobile optimizations -->
+    <meta name="theme-color" content="#00B4A0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="img/icono_recortado.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/icono_recortado.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="img/icono_recortado.png">
+    <link rel="icon" type="image/svg+xml" href="img/NELVOX/logos transparente/nelvox-favicon-transparent.svg">
+    <link rel="icon" type="image/svg+xml" sizes="32x32" href="img/NELVOX/logos transparente/nelvox-favicon-transparent.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/NELVOX/logos transparente/nelvox-favicon-transparent.svg">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,8 +32,7 @@
     <nav class="navbar" id="navbar">
         <div class="container">
             <a href="#inicio" class="navbar-logo">
-                <img src="img/mld_transparente.png" alt="MLD Soluciones Logo" class="navbar-logo-img">
-                <span class="navbar-logo-text">MLD Soluciones</span>
+                <img src="img/NELVOX/logos transparente/nelvox-logo-transparent-dark.svg" alt="NELVOX Logo" class="navbar-logo-img">
             </a>
             
             <ul class="navbar-nav">
@@ -48,7 +53,7 @@
              HERO SECTION
              ═══════════════════════════════════════════ -->
         <section class="hero" id="inicio">
-            <div class="container">
+            <div class="hero-left">
                 <div class="hero-content">
                     <span class="hero-badge">Consultoría · Desarrollo · Automatización</span>
                     
@@ -72,11 +77,15 @@
                         <span>4 especialistas</span>
                     </div>
                 </div>
-                
-                <div class="hero-decorative">
-                    <div class="hero-shape"></div>
-                    <div class="hero-shape"></div>
-                    <div class="hero-shape"></div>
+            </div>
+            
+            <div class="hero-right">
+                <img class="hero-img active" src="img/hero1.jpg" alt="Transformación digital">
+                <img class="hero-img" src="img/hero2.jpg" alt="Desarrollo de software">
+                <img class="hero-img" src="img/hero3.jpg" alt="Automatización">
+                <div class="img-overlay"></div>
+                <div class="hero-carousel-badge">
+                    <span class="badge-text">Soluciones a medida</span>
                 </div>
             </div>
         </section>
@@ -138,49 +147,118 @@
              SERVICES SECTION
              ═══════════════════════════════════════════ -->
         <section class="services reveal" id="servicios">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">Servicios</span>
-                    <h2 class="section-title">Soluciones que impulsan tu negocio</h2>
-                    <p class="section-description">Desarrollamos software a medida y brindamos consultoría estratégica para digitalizar y automatizar procesos empresariales.</p>
+            <div class="services-header">
+                <div class="container">
+                    <div class="section-header">
+                        <span class="section-tag">Servicios</span>
+                        <h2 class="section-title">Soluciones que impulsan tu negocio</h2>
+                        <p class="section-description">Desarrollamos software a medida y brindamos consultoría estratégica para digitalizar y automatizar procesos empresariales.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="services-list">
+                <!-- Servicio 1: Texto izquierda, Imagen derecha -->
+                <div class="service-item">
+                    <div class="service-content">
+                        <span class="service-number">01</span>
+                        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41M12 6a6 6 0 100 12 6 6 0 000-12z"/>
+                        </svg>
+                        <h3>Consultoría Tecnológica</h3>
+                        <p>Análisis, optimización y digitalización de procesos empresariales. Orientamos tu transformación digital con estrategia clara y accionable.</p>
+                    </div>
+                    <div class="service-visual">
+                        <img src="img/hero1.jpg" alt="Consultoría Tecnológica" class="service-img">
+                        <div class="service-overlay"></div>
+                    </div>
                 </div>
                 
-                <div class="services-grid">
-                    <div class="service-card">
-                        <span class="service-number">01</span>
-                        <h3>Consultoría Tecnológica</h3>
-                        <p>Análisis, optimización y digitalización de procesos empresariales. Orientamos tu transformación digital con estrategia.</p>
-                    </div>
-                    
-                    <div class="service-card">
+                <!-- Servicio 2: Imagen izquierda, Texto derecha -->
+                <div class="service-item reverse">
+                    <div class="service-content">
                         <span class="service-number">02</span>
+                        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <polyline points="16 18 22 12 16 6"/>
+                            <polyline points="8 6 2 12 8 18"/>
+                        </svg>
                         <h3>Desarrollo de Software</h3>
-                        <p>Soluciones personalizadas para tu negocio, desde apps web hasta sistemas internos que se adaptan a tus necesidades.</p>
+                        <p>Soluciones personalizadas para tu negocio, desde aplicaciones web modernas hasta sistemas internos robustos que se adaptan y escalan con tus necesidades.</p>
                     </div>
-                    
-                    <div class="service-card">
+                    <div class="service-visual">
+                        <img src="img/hero2.jpg" alt="Desarrollo de Software" class="service-img">
+                        <div class="service-overlay"></div>
+                    </div>
+                </div>
+                
+                <!-- Servicio 3: Texto izquierda, Imagen derecha -->
+                <div class="service-item">
+                    <div class="service-content">
                         <span class="service-number">03</span>
+                        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 1v6m0 6v6m0-13l-3.897 3.897M12 7l3.897 3.897M12 17l-3.897-3.897M12 17l3.897-3.897M1 12h6m6 0h6m-13 0l3.897 3.897M7 12l3.897-3.897M17 12l-3.897 3.897M17 12l-3.897-3.897"/>
+                        </svg>
                         <h3>Automatización de Procesos</h3>
-                        <p>Chatbots, visión por computadora y automatización de tareas repetitivas para optimizar la operación de tu empresa.</p>
+                        <p>Chatbots inteligentes, visión por computadora y automatización de tareas repetitivas para optimizar la operación y reducir errores humanos.</p>
                     </div>
-                    
-                    <div class="service-card">
+                    <div class="service-visual">
+                        <img src="img/hero3.jpg" alt="Automatización de Procesos" class="service-img">
+                        <div class="service-overlay"></div>
+                    </div>
+                </div>
+                
+                <!-- Servicio 4: Imagen izquierda, Texto derecha -->
+                <div class="service-item reverse">
+                    <div class="service-content">
                         <span class="service-number">04</span>
+                        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
                         <h3>Inteligencia de Datos</h3>
-                        <p>Power BI, análisis de datos y dashboards interactivos para tomar decisiones informadas basadas en información real.</p>
+                        <p>Power BI, análisis avanzado de datos y dashboards interactivos para tomar decisiones informadas basadas en información real y actualizada.</p>
                     </div>
-                    
-                    <div class="service-card">
+                    <div class="service-visual">
+                        <img src="img/transformaciondigital.jpg" alt="Inteligencia de Datos" class="service-img">
+                        <div class="service-overlay"></div>
+                    </div>
+                </div>
+                
+                <!-- Servicio 5: Texto izquierda, Imagen derecha -->
+                <div class="service-item">
+                    <div class="service-content">
                         <span class="service-number">05</span>
+                        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 0 0 0 7.07 7.07l1.71-1.71"/>
+                        </svg>
                         <h3>Integraciones de Sistemas</h3>
-                        <p>Conecta tu negocio con plataformas digitales, e-commerce y herramientas externas. Integración SUNAT y facturación electrónica.</p>
+                        <p>Conecta tu negocio con plataformas digitales, e-commerce y herramientas externas. Integración SUNAT y facturación electrónica en Perú.</p>
                     </div>
-                    
-                    <div class="service-card">
+                    <div class="service-visual">
+                        <img src="img/hero1.jpg" alt="Integraciones de Sistemas" class="service-img">
+                        <div class="service-overlay"></div>
+                    </div>
+                </div>
+                
+                <!-- Servicio 6: Imagen izquierda, Texto derecha -->
+                <div class="service-item reverse">
+                    <div class="service-content">
                         <span class="service-number">06</span>
+                        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <circle cx="12" cy="12" r="6"/>
+                            <circle cx="12" cy="12" r="2"/>
+                        </svg>
                         <h3>Estrategia Digital</h3>
-                        <p>ERP ligeros y modulares para MYPES. Gestión eficiente de recursos, ventas y operaciones escalables.</p>
+                        <p>ERP ligeros y modulares para MYPES. Gestión eficiente de recursos, ventas y operaciones escalables adaptadas a tu realidad empresarial.</p>
                     </div>
+                    <div class="service-visual">
+                        <img src="img/hero2.jpg" alt="Estrategia Digital" class="service-img">
+                        <div class="service-overlay"></div>
+                    </div>
+                </div>
+            </div>
                 </div>
             </div>
         </section>
@@ -248,7 +326,7 @@
                     </div>
                     
                     <div class="about-quote">
-                        "En MLD Soluciones creemos que cada negocio es único. Convertimos la tecnología en un activo estratégico para impulsar el crecimiento de nuestros clientes."
+                        "En NELVOX creemos que cada negocio es único. Convertimos la tecnología en un activo estratégico para impulsar el crecimiento de nuestros clientes."
                     </div>
                 </div>
                 
@@ -377,8 +455,7 @@
                 <div class="footer-grid">
                     <div>
                         <div class="footer-brand">
-                            <img src="img/mld_transparente.png" alt="MLD Soluciones Logo" class="footer-logo-img">
-                            <span class="footer-brand-text">MLD Soluciones</span>
+                            <img src="img/NELVOX/logos transparente/nelvox-logo-transparent-dark.svg" alt="NELVOX Logo" class="footer-logo-img">
                         </div>
                         <p class="footer-tagline">
                             Impulsamos el crecimiento de empresas con soluciones tecnológicas innovadoras.
@@ -431,7 +508,7 @@
                 </div>
                 
                 <div class="footer-bottom">
-                    <span>&copy; 2025 MLD Soluciones. Todos los derechos reservados.</span>
+                    <span>&copy; 2025 NELVOX. Todos los derechos reservados.</span>
                     <span>Hecho en Latinoamérica</span>
                 </div>
             </div>

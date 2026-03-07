@@ -1,5 +1,5 @@
 /**
- * MLD SOLUCIONES - MAIN JAVASCRIPT
+ * NELVOX - MAIN JAVASCRIPT
  * ═══════════════════════════════════════════
  */
 
@@ -10,7 +10,7 @@
     // LENIS SMOOTH SCROLL INITIALIZATION
     // ═══════════════════════════════════════════
     const lenis = new Lenis({
-        duration: 0.8,
+        duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         direction: 'vertical',
         smooth: true,
@@ -119,8 +119,9 @@
             if (target) {
                 e.preventDefault();
                 const isMobile = window.innerWidth <= 768;
+                
                 lenis.scrollTo(target, {
-                    offset: -68,
+                    offset: -76,
                     duration: isMobile ? 0 : 1.5
                 });
             }
@@ -131,7 +132,7 @@
     // INITIALIZE ON DOM READY
     // ═══════════════════════════════════════════
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('MLD Soluciones - Website loaded successfully with Lenis');
+        console.log('NELVOX - Website loaded successfully with Lenis');
         
         // Check for hash in URL on page load
         if (window.location.hash) {
@@ -140,12 +141,64 @@
                 const isMobile = window.innerWidth <= 768;
                 setTimeout(() => {
                     lenis.scrollTo(target, {
-                        offset: -68,
+                        offset: -76,
                         duration: isMobile ? 0 : 1.5
                     });
                 }, 100);
             }
         }
     });
+
+    // ═══════════════════════════════════════════
+    // HERO CAROUSEL AUTO-ROTATION
+    // ═══════════════════════════════════════════
+    const carouselImages = document.querySelectorAll('.hero-img');
+    let currentSlide = 0;
+    let isTransitioning = false;
+
+    // Load first image without flash
+    const firstImg = carouselImages[0];
+    if (firstImg) {
+        firstImg.addEventListener('load', () => {
+            firstImg.style.opacity = '1';
+            firstImg.style.visibility = 'visible';
+        });
+        
+        // If already cached
+        if (firstImg.complete) {
+            firstImg.style.opacity = '1';
+            firstImg.style.visibility = 'visible';
+        }
+    }
+
+    function rotateCarousel() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        const currentImage = carouselImages[currentSlide];
+        const nextSlide = (currentSlide + 1) % carouselImages.length;
+        const nextImage = carouselImages[nextSlide];
+
+        // Start fade out current image
+        currentImage.style.opacity = '0';
+
+        // After 400ms (half transition), start fade in next image
+        setTimeout(() => {
+            currentImage.classList.remove('active');
+            currentSlide = nextSlide;
+            nextImage.classList.add('active');
+            nextImage.style.opacity = '1';
+            
+            // Allow next transition after full duration
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 400);
+        }, 400);
+    }
+
+    // Auto-rotate every 7 seconds
+    if (carouselImages.length > 0) {
+        setInterval(rotateCarousel, 7000);
+    }
 
 })();
