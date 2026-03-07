@@ -385,26 +385,34 @@ section {
     transform: translateZ(0);
 }
 
-.hero-carousel-badge {
+.hero-logo-wrapper {
     position: absolute;
     bottom: 120px;
     left: 40px;
-    padding: 12px 20px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    border-radius: 14px;
-    border: 1px solid rgba(45, 212, 191, 0.2);
     z-index: 4;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--ink);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transform: translate3d(0, 0, 0);
 }
 
-.badge-text {
-    white-space: nowrap;
+.hero-logo-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    width: 130%;
+    height: 110%;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 70%);
+    filter: blur(20px);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.hero-logo {
+    position: relative;
+    height: 120px;
+    width: auto;
+    display: block;
+    opacity: 0.95;
+    filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.15));
 }
 
 /* Hero animations */
@@ -1280,9 +1288,13 @@ section {
         padding: 40px 32px 0 48px;
     }
     
-    .hero-carousel-badge {
+    .hero-logo-wrapper {
         bottom: 80px;
         left: 32px;
+    }
+    
+    .hero-logo {
+        height: 80px;
     }
     
     .about .container {
