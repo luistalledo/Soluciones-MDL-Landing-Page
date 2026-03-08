@@ -33,6 +33,7 @@ html {
     margin: 0;
     padding: 0;
     scroll-padding-top: 76px;
+    overflow-x: hidden; /* ← AÑADIR ESTO */
 }
 
 body {
@@ -93,6 +94,7 @@ section {
     top: 0;
     left: 0;
     right: 0;
+    width: 100%;
     height: 76px;
     background: #F8FAFB;
     z-index: 1000;
@@ -1407,6 +1409,9 @@ section {
     /* Navbar móvil */
     .navbar .container {
         padding: 0 24px;
+        max-width: 100%; /* ← AÑADIR ESTO */
+        width: 100%;     /* ← AÑADIR ESTO */
+        box-sizing: border-box; /* ← AÑADIR ESTO */
     }
     
     .navbar-logo-img {
@@ -1762,3 +1767,22 @@ section {
     }
 }
 
+/* Fix global overflow móvil */
+@media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden;
+        max-width: 100vw;
+    }
+    
+    .tech-marquee-wrapper {
+        max-width: 100vw;
+    }
+    
+    .hero,
+    .services,
+    .service-item,
+    .services-list {
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+}
