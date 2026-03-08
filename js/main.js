@@ -227,26 +227,43 @@
         // ═══════════════════════════════════════════
         // SERVICE IMAGES — mostrar solo cuando carguen
         // ═══════════════════════════════════════════
+        // ═══════════════════════════════════════════
+        // SERVICE IMAGES — carga manual con IntersectionObserver
+        // ═══════════════════════════════════════════
         document.querySelectorAll('.service-img').forEach(img => {
             const visual = img.closest('.service-visual');
             const overlay = visual?.querySelector('.service-overlay');
 
+            // Ocultar overlay y imagen al inicio
+            img.style.opacity = '0';
             if (overlay) overlay.style.opacity = '0';
 
-            if (img.complete && img.naturalWidth > 0) {
-                img.style.opacity = '1';
-                if (overlay) overlay.style.opacity = '1';
-            } else {
-                img.style.opacity = '0';
-                img.addEventListener('load', () => {
-                    img.style.transition = 'opacity 0.5s ease';
-                    img.style.opacity = '1';
-                    if (overlay) {
-                        overlay.style.transition = 'opacity 0.5s ease';
-                        overlay.style.opacity = '1';
+            // Guardar src real y quitarlo para no cargar hasta que sea necesario
+            const realSrc = img.getAttribute('src');
+            img.removeAttribute('src');
+
+            const imgObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Cargar imagen cuando entra al viewport
+                        img.src = realSrc;
+                        img.addEventListener('load', () => {
+                            img.style.transition = 'opacity 0.5s ease';
+                            img.style.opacity = '1';
+                            if (overlay) {
+                                overlay.style.transition = 'opacity 0.5s ease';
+                                overlay.style.opacity = '1';
+                            }
+                        }, { once: true });
+                        imgObserver.unobserve(img);
                     }
-                }, { once: true });
-            }
+                });
+            }, {
+                rootMargin: '200px 0px', // empieza a cargar 200px antes de entrar al viewport
+                threshold: 0
+            });
+
+            imgObserver.observe(img);
         });
 
         // ═══════════════════════════════════════════
