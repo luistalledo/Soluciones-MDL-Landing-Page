@@ -102,6 +102,16 @@
         observer.observe(el);
     });
 
+    // Observe all elements with .reveal-left class
+    document.querySelectorAll('.reveal-left').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Observe all elements with .reveal-right class
+    document.querySelectorAll('.reveal-right').forEach(el => {
+        observer.observe(el);
+    });
+
     // ═══════════════════════════════════════════
     // SMOOTH SCROLL FOR ANCHOR LINKS
     // ═══════════════════════════════════════════
@@ -200,5 +210,49 @@
     if (carouselImages.length > 0) {
         setInterval(rotateCarousel, 7000);
     }
+
+    // ═══════════════════════════════════════════
+    // ANIMATED COUNTERS FOR METRICS
+    // ═══════════════════════════════════════════
+    function animateCounter(element) {
+        const target = parseInt(element.getAttribute('data-target'));
+        const duration = 2000; // 2 seconds
+        const step = target / (duration / 16); // 60fps
+        let current = 0;
+
+        const updateCounter = () => {
+            current += step;
+            if (current < target) {
+                element.textContent = Math.floor(current);
+                requestAnimationFrame(updateCounter);
+            } else {
+                element.textContent = target;
+            }
+        };
+
+        updateCounter();
+    }
+
+    // Observer for counters
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counter = entry.target;
+                if (!counter.classList.contains('counted')) {
+                    counter.classList.add('counted');
+                    animateCounter(counter);
+                }
+            }
+        });
+    }, {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5
+    });
+
+    // Observe all counter elements
+    document.querySelectorAll('.counter').forEach(counter => {
+        counterObserver.observe(counter);
+    });
 
 })();
