@@ -7,10 +7,10 @@
     'use strict';
 
     // ═══════════════════════════════════════════
-    // LENIS SMOOTH SCROLL INITIALIZATION
+    // LENIS SMOOTH SCROLL
     // ═══════════════════════════════════════════
     const lenis = new Lenis({
-        duration: 1.2,
+        duration: 0.8,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         direction: 'vertical',
         smooth: true,
@@ -18,65 +18,87 @@
         touchMultiplier: 2
     });
 
+    let rafId = null;
+
     function raf(time) {
         lenis.raf(time);
-        requestAnimationFrame(raf);
+        rafId = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+
+    rafId = requestAnimationFrame(raf);
+
+    // Pausa el loop completo cuando la pestaña no está visible
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            lenis.stop();
+            if (rafId) {
+                cancelAnimationFrame(rafId);
+                rafId = null;
+            }
+        } else {
+            lenis.start();
+            rafId = requestAnimationFrame(raf);
+        }
+    });
 
     // ═══════════════════════════════════════════
     // NAVBAR SCROLL EFFECT
     // ═══════════════════════════════════════════
     const navbar = document.getElementById('navbar');
-    let lastScroll = 0;
+    let navbarTicking = false;
 
     function handleNavbarScroll() {
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-        
-        lastScroll = currentScroll;
+        if (navbarTicking) return;
+        navbarTicking = true;
+
+        requestAnimationFrame(() => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            navbarTicking = false;
+        });
     }
 
-    // Use Lenis scroll event instead of window scroll
     lenis.on('scroll', handleNavbarScroll);
 
     // ═══════════════════════════════════════════
     // SCROLL TO TOP BUTTON
     // ═══════════════════════════════════════════
     const scrollToTopBtn = document.getElementById('scrollToTop');
-    
+    let scrollTopTicking = false;
+
     function handleScrollToTopVisibility() {
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll > 400) {
-            scrollToTopBtn.classList.add('visible');
-        } else {
-            scrollToTopBtn.classList.remove('visible');
-        }
+        if (scrollTopTicking) return;
+        scrollTopTicking = true;
+
+        requestAnimationFrame(() => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 400) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+            scrollTopTicking = false;
+        });
     }
-    
+
     lenis.on('scroll', handleScrollToTopVisibility);
-    
+
     function handleScrollToTop(e) {
         e.preventDefault();
         e.stopPropagation();
         const isMobile = window.innerWidth <= 768;
-        
-        // Force stop any ongoing scroll
-        window.scrollTo(0, window.pageYOffset);
-        
+
         lenis.scrollTo('top', {
-            duration: isMobile ? 0 : 1.5,
+            duration: isMobile ? 0 : 1,
             force: true,
             lock: true
         });
     }
-    
+
     scrollToTopBtn.addEventListener('click', handleScrollToTop);
     scrollToTopBtn.addEventListener('touchend', handleScrollToTop);
 
@@ -85,7 +107,7 @@
     // ═══════════════════════════════════════════
     const observerOptions = {
         root: null,
-        rootMargin: '0px',
+        rootMargin: '0px 0px -40px 0px',
         threshold: 0.1
     };
 
@@ -93,22 +115,12 @@
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Observe all elements with .reveal class
-    document.querySelectorAll('.reveal').forEach(el => {
-        observer.observe(el);
-    });
-
-    // Observe all elements with .reveal-left class
-    document.querySelectorAll('.reveal-left').forEach(el => {
-        observer.observe(el);
-    });
-
-    // Observe all elements with .reveal-right class
-    document.querySelectorAll('.reveal-right').forEach(el => {
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
         observer.observe(el);
     });
 
@@ -118,21 +130,20 @@
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
-            
-            // Skip if href is just "#"
+
             if (href === '#') {
                 e.preventDefault();
                 return;
             }
-            
+
             const target = document.querySelector(href);
             if (target) {
                 e.preventDefault();
                 const isMobile = window.innerWidth <= 768;
-                
+
                 lenis.scrollTo(target, {
                     offset: -76,
-                    duration: isMobile ? 0 : 1.5
+                    duration: isMobile ? 0 : 1
                 });
             }
         });
@@ -143,8 +154,7 @@
     // ═══════════════════════════════════════════
     document.addEventListener('DOMContentLoaded', function() {
         console.log('NELVOX - Website loaded successfully with Lenis');
-        
-        // Check for hash in URL on page load
+
         if (window.location.hash) {
             const target = document.querySelector(window.location.hash);
             if (target) {
@@ -152,7 +162,7 @@
                 setTimeout(() => {
                     lenis.scrollTo(target, {
                         offset: -76,
-                        duration: isMobile ? 0 : 1.5
+                        duration: isMobile ? 0 : 1
                     });
                 }, 100);
             }
@@ -165,59 +175,69 @@
     const carouselImages = document.querySelectorAll('.hero-img');
     let currentSlide = 0;
     let isTransitioning = false;
+    let carouselInterval = null;
 
-    // Load first image without flash
     const firstImg = carouselImages[0];
     if (firstImg) {
-        firstImg.addEventListener('load', () => {
-            firstImg.style.opacity = '1';
-            firstImg.style.visibility = 'visible';
-        });
-        
-        // If already cached
         if (firstImg.complete) {
             firstImg.style.opacity = '1';
             firstImg.style.visibility = 'visible';
+        } else {
+            firstImg.addEventListener('load', () => {
+                firstImg.style.opacity = '1';
+                firstImg.style.visibility = 'visible';
+            }, { once: true });
         }
     }
 
     function rotateCarousel() {
-        if (isTransitioning) return;
+        if (isTransitioning || document.hidden) return;
         isTransitioning = true;
 
         const currentImage = carouselImages[currentSlide];
         const nextSlide = (currentSlide + 1) % carouselImages.length;
         const nextImage = carouselImages[nextSlide];
 
-        // Start fade out current image
         currentImage.style.opacity = '0';
 
-        // After 400ms (half transition), start fade in next image
         setTimeout(() => {
             currentImage.classList.remove('active');
             currentSlide = nextSlide;
             nextImage.classList.add('active');
             nextImage.style.opacity = '1';
-            
-            // Allow next transition after full duration
+
             setTimeout(() => {
                 isTransitioning = false;
             }, 400);
         }, 400);
     }
 
-    // Auto-rotate every 7 seconds
     if (carouselImages.length > 0) {
-        setInterval(rotateCarousel, 7000);
+        carouselInterval = setInterval(rotateCarousel, 7000);
     }
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            clearInterval(carouselInterval);
+            carouselInterval = null;
+        } else if (carouselImages.length > 0 && !carouselInterval) {
+            carouselInterval = setInterval(rotateCarousel, 7000);
+        }
+    });
 
     // ═══════════════════════════════════════════
     // ANIMATED COUNTERS FOR METRICS
     // ═══════════════════════════════════════════
     function animateCounter(element) {
         const target = parseInt(element.getAttribute('data-target'));
-        const duration = 2000; // 2 seconds
-        const step = target / (duration / 16); // 60fps
+
+        if (target === 0) {
+            element.textContent = 0;
+            return;
+        }
+
+        const duration = 2000;
+        const step = target / (duration / 16);
         let current = 0;
 
         const updateCounter = () => {
@@ -230,10 +250,9 @@
             }
         };
 
-        updateCounter();
+        requestAnimationFrame(updateCounter);
     }
 
-    // Observer for counters
     const counterObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -241,6 +260,7 @@
                 if (!counter.classList.contains('counted')) {
                     counter.classList.add('counted');
                     animateCounter(counter);
+                    counterObserver.unobserve(counter);
                 }
             }
         });
@@ -250,7 +270,6 @@
         threshold: 0.5
     });
 
-    // Observe all counter elements
     document.querySelectorAll('.counter').forEach(counter => {
         counterObserver.observe(counter);
     });

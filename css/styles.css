@@ -12,7 +12,6 @@
 }
 
 :root {
-    /* Color System */
     --bg-base: #F8FAFB;
     --bg-surface: #FFFFFF;
     --bg-subtle: #F0F4F8;
@@ -33,7 +32,8 @@ html {
     margin: 0;
     padding: 0;
     scroll-padding-top: 76px;
-    overflow-x: hidden; /* ← AÑADIR ESTO */
+    overflow-x: hidden;
+    scroll-behavior: smooth; /* ← esto es todo */
 }
 
 body {
@@ -100,8 +100,8 @@ section {
     z-index: 1000;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
     transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform;
-    transform: translateZ(0);
+    /* Solo transform en will-change — box-shadow no puede ser acelerado por GPU */
+    will-change: box-shadow;
     contain: layout style paint;
 }
 
@@ -164,8 +164,6 @@ section {
     font-size: 14px;
     font-weight: 500;
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
-    will-change: background-color;
-    transform: translateZ(0);
 }
 
 .navbar-cta:hover {
@@ -206,8 +204,8 @@ section {
     background-image: radial-gradient(circle, rgba(0, 180, 160, 0.12) 2px, transparent 2px);
     background-size: 28px 28px;
     z-index: 0;
-    will-change: transform;
-    transform: translateZ(0);
+    /* Sin will-change — el dot pattern es estático, no necesita layer GPU */
+    pointer-events: none;
 }
 
 .hero-right {
@@ -218,7 +216,6 @@ section {
     border-radius: 0 0 0 50px;
 }
 
-/* Divisor diagonal en el borde izquierdo */
 .hero-right::before {
     content: '';
     position: absolute;
@@ -228,6 +225,7 @@ section {
     background-size: 28px 28px;
     clip-path: polygon(0 0, 14% 0, 0 calc(100% - 50px));
     z-index: 3;
+    pointer-events: none;
 }
 
 .hero-content {
@@ -259,12 +257,13 @@ section {
     background: var(--accent);
     border-radius: 50%;
     animation: pulse 2s ease-in-out infinite;
-    will-change: opacity, transform;
+    /* Solo opacity en will-change — es lo único que anima */
+    will-change: opacity;
 }
 
 @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1) translateZ(0); }
-    50% { opacity: 0.5; transform: scale(0.9) translateZ(0); }
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.9); }
 }
 
 .hero-title {
@@ -306,14 +305,12 @@ section {
     cursor: pointer;
     transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
     display: inline-block;
-    will-change: transform, background-color;
-    transform: translateZ(0);
 }
 
 .btn-primary:hover {
     background: #009688;
     box-shadow: 0 0 20px rgba(0, 180, 160, 0.25);
-    transform: translate3d(0, -1px, 0);
+    transform: translateY(-1px);
 }
 
 .btn-ghost {
@@ -328,8 +325,6 @@ section {
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
     display: inline-block;
-    will-change: background-color, color;
-    transform: translateZ(0);
 }
 
 .btn-ghost:hover {
@@ -372,12 +367,13 @@ section {
     opacity: 0;
     visibility: hidden;
     transition: opacity 800ms ease-in-out, visibility 800ms ease-in-out;
-    will-change: opacity, visibility;
-    transform: translate3d(0, 0, 0);
+    /* will-change solo en la imagen activa — ver JS */
+    transform: translateZ(0);
 }
 
 .hero-img.active {
     visibility: visible;
+    will-change: opacity;
 }
 
 .img-overlay {
@@ -392,8 +388,6 @@ section {
     z-index: 1;
     pointer-events: none;
     isolation: isolate;
-    will-change: auto;
-    transform: translateZ(0);
 }
 
 .hero-logo-wrapper {
@@ -495,14 +489,11 @@ section {
     flex-shrink: 0;
     animation: scroll-horizontal 40s linear infinite;
     min-width: 100%;
+    /* will-change solo en transform — es lo único que anima */
     will-change: transform;
-    transform: translateZ(0);
 }
 
-.tech-marquee:hover {
-    animation-play-state: paused;
-}
-
+.tech-marquee:hover,
 .tech-marquee-wrapper:hover .tech-marquee {
     animation-play-state: paused;
 }
@@ -520,12 +511,8 @@ section {
 }
 
 @keyframes scroll-horizontal {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(calc(-100% - 16px));
-    }
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-100% - 16px)); }
 }
 
 /* ═══════════════════════════════════════════
@@ -587,7 +574,6 @@ section {
     font-size: 16px;
 }
 
-/* Services List - Full Width Items */
 .services-list {
     display: flex;
     flex-direction: column;
@@ -605,6 +591,9 @@ section {
     min-height: 75vh;
     position: relative;
     overflow: hidden;
+    /* Evita que el navegador pinte items fuera del viewport */
+    content-visibility: auto;
+    contain-intrinsic-size: 0 75vh;
 }
 
 .service-item.reverse {
@@ -619,7 +608,6 @@ section {
     order: 1;
 }
 
-/* Service Content (Texto) */
 .service-content {
     display: flex;
     flex-direction: column;
@@ -681,10 +669,10 @@ section {
     z-index: 1;
 }
 
-/* Service Visual (Imagen) */
 .service-visual {
     position: relative;
     overflow: hidden;
+    /* isolation: isolate causa un stacking context extra — solo necesario si hay mix-blend-mode */
     isolation: isolate;
     background: #f4fafa;
 }
@@ -697,13 +685,14 @@ section {
     object-fit: cover;
     object-position: center;
     filter: grayscale(60%) brightness(0.9) contrast(1.05);
-    transform: translate3d(0, 0, 0);
-    will-change: transform;
+    transform: translateZ(0);
+    /* will-change solo al hacer hover — se gestiona con CSS */
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .service-item:hover .service-img {
-    transform: translate3d(0, 0, 0) scale(1.03);
+    will-change: transform;
+    transform: scale(1.03) translateZ(0);
 }
 
 .service-overlay {
@@ -717,8 +706,6 @@ section {
     mix-blend-mode: color;
     z-index: 1;
     pointer-events: none;
-    isolation: isolate;
-    transform: translateZ(0);
 }
 
 /* ═══════════════════════════════════════════
@@ -774,8 +761,6 @@ section {
     background-size: 28px 28px;
     z-index: -1;
     pointer-events: none;
-    will-change: transform;
-    transform: translateZ(0);
 }
 
 .process .section-header {
@@ -832,8 +817,6 @@ section {
     background: white;
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     cursor: pointer;
-    will-change: background-color, color, border-color;
-    transform: translateZ(0);
 }
 
 .step-number:hover {
@@ -945,16 +928,14 @@ section {
     font-size: 13px;
     font-weight: 500;
     text-decoration: none;
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
     display: inline-block;
-    will-change: background-color, color, transform;
-    transform: translateZ(0);
 }
 
 .team-portfolio-btn:hover {
     background: var(--accent);
     color: white;
-    transform: translateY(-1px) translateZ(0);
+    transform: translateY(-1px);
 }
 
 /* ═══════════════════════════════════════════
@@ -1015,7 +996,7 @@ section {
 }
 
 /* ═══════════════════════════════════════════
-   SYSTEMS SECTION (Nuestros Sistemas)
+   SYSTEMS SECTION
    ═══════════════════════════════════════════ */
 .systems {
     background: var(--bg-surface);
@@ -1033,7 +1014,7 @@ section {
     border-radius: 10px;
     padding: 36px;
     position: relative;
-    transition: all 0.2s ease;
+    transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .system-card::before {
@@ -1092,7 +1073,7 @@ section {
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
-    transition: all 0.2s ease;
+    transition: gap 0.2s ease, color 0.2s ease;
 }
 
 .system-link:hover {
@@ -1209,7 +1190,7 @@ section {
     justify-content: center;
     color: var(--muted);
     text-decoration: none;
-    transition: all 0.2s ease;
+    transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .footer-social a:hover {
@@ -1263,40 +1244,42 @@ section {
    ═══════════════════════════════════════════ */
 .reveal {
     opacity: 0;
-    transform: translateY(24px) translateZ(0);
+    transform: translateY(24px);
     transition: opacity 0.6s ease, transform 0.6s ease;
     will-change: opacity, transform;
 }
 
 .reveal.visible {
     opacity: 1;
-    transform: translateY(0) translateZ(0);
+    transform: translateY(0);
+    /* Liberar la layer GPU una vez que terminó la animación */
+    will-change: auto;
 }
 
-/* Reveal from left */
 .reveal-left {
     opacity: 0;
-    transform: translateX(-40px) translateZ(0);
+    transform: translateX(-40px);
     transition: opacity 0.7s ease, transform 0.7s ease;
     will-change: opacity, transform;
 }
 
 .reveal-left.visible {
     opacity: 1;
-    transform: translateX(0) translateZ(0);
+    transform: translateX(0);
+    will-change: auto;
 }
 
-/* Reveal from right */
 .reveal-right {
     opacity: 0;
-    transform: translateX(40px) translateZ(0);
+    transform: translateX(40px);
     transition: opacity 0.7s ease, transform 0.7s ease;
     will-change: opacity, transform;
 }
 
 .reveal-right.visible {
     opacity: 1;
-    transform: translateX(0) translateZ(0);
+    transform: translateX(0);
+    will-change: auto;
 }
 
 /* ═══════════════════════════════════════════
@@ -1318,477 +1301,281 @@ section {
     justify-content: center;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(10px) translateZ(0);
+    transform: translateY(10px);
     transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
     z-index: 999;
-    will-change: opacity, visibility, transform, background-color;
 }
 
 .scroll-to-top.visible {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0) translateZ(0);
+    transform: translateY(0);
 }
 
 .scroll-to-top:hover {
     background: #00C9BA;
     border-color: #00C9BA;
-    transform: translateY(-2px) translateZ(0);
+    transform: translateY(-2px);
 }
 
 .scroll-to-top:active {
-    transform: translateY(0) translateZ(0);
+    transform: translateY(0);
 }
 
 /* ═══════════════════════════════════════════
-   RESPONSIVE
+   RESPONSIVE - Large Desktop 1200px+
    ═══════════════════════════════════════════ */
-
-/* Large Desktop - 1200px+ */
 @media (max-width: 1200px) {
     .container {
         padding: 0 40px;
     }
-    
+
     .hero-left {
         padding: 40px 40px 0 60px;
     }
 }
 
-/* Tablet Landscape - 1024px */
+/* ═══════════════════════════════════════════
+   RESPONSIVE - Tablet Landscape 1024px
+   ═══════════════════════════════════════════ */
 @media (max-width: 1024px) {
     h2 {
         font-size: clamp(36px, 5vw, 48px);
     }
-    
+
     .container {
         padding: 0 32px;
     }
-    
+
     section {
         padding: 100px 0;
     }
-    
+
     .hero {
         height: 100vh;
     }
-    
+
     .hero-left {
         padding: 40px 32px 0 48px;
     }
-    
+
     .hero-logo-wrapper {
         bottom: 80px;
         left: 32px;
     }
-    
+
     .hero-logo {
         height: 80px;
     }
-    
+
     .about .container {
         gap: 60px;
     }
-    
+
     .footer-grid {
         grid-template-columns: 2fr 1fr 1fr;
     }
 }
 
-/* Tablet Portrait - 768px */
+/* ═══════════════════════════════════════════
+   RESPONSIVE - Tablet Portrait 768px
+   ═══════════════════════════════════════════ */
 @media (max-width: 768px) {
-    /* Base adjustments */
+    /* Fix overflow global */
+    html, body {
+        overflow-x: hidden;
+        max-width: 100vw;
+    }
+
     section {
         padding: 80px 0;
     }
-    
+
     .container {
         padding: 0 24px;
     }
-    
-    /* Navbar móvil */
+
+    /* Navbar */
     .navbar .container {
         padding: 0 24px;
-        max-width: 100%; /* ← AÑADIR ESTO */
-        width: 100%;     /* ← AÑADIR ESTO */
-        box-sizing: border-box; /* ← AÑADIR ESTO */
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
     }
-    
+
     .navbar-logo-img {
         height: 44px;
     }
-    
+
     .navbar-nav {
         display: none;
     }
-    
+
     .navbar-cta {
         padding: 10px 20px;
         font-size: 13px;
-        /* Touch target mínimo 44x44px */
         min-height: 44px;
         display: flex;
         align-items: center;
     }
-    
-    /* Hero móvil */
+
+    /* Hero */
     .hero {
         grid-template-columns: 1fr;
         height: auto;
         min-height: 100vh;
         padding-top: 76px;
     }
-    
+
     .hero-left {
         padding: 32px 24px 48px;
         min-height: calc(100vh - 76px);
     }
-    
+
     .hero-right {
         display: none;
     }
-    
+
     .hero-title {
         font-size: clamp(36px, 10vw, 56px);
     }
-    
+
     .hero-subtitle {
         font-size: 16px;
         max-width: 100%;
     }
-    
+
     .hero-cta-group {
         flex-direction: column;
         gap: 12px;
     }
-    
+
     .btn-primary,
     .btn-ghost {
         width: 100%;
         text-align: center;
-        /* Touch target mínimo */
         min-height: 48px;
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 16px 32px;
     }
-    
+
     .hero-stats {
         flex-wrap: wrap;
         font-size: 12px;
         gap: 16px;
     }
-    
+
     .hero-badge {
         font-size: 10px;
         padding: 6px 12px;
     }
-    
-    /* Tech strip móvil */
+
+    /* Hero carousel — transición más rápida y sin layer extra en móvil */
+    .hero-img {
+        transition: opacity 400ms ease-in-out;
+        will-change: auto;
+    }
+
+    /* Tech strip */
     .tech-strip {
         padding: 24px 0;
     }
-    
+
+    .tech-marquee-wrapper {
+        max-width: 100vw;
+    }
+
+    /* Quitar will-change del marquee en móvil — la animación CSS sola es suficiente */
+    .tech-marquee {
+        will-change: auto;
+    }
+
     .tech-pill {
         padding: 8px 16px;
         font-size: 12px;
     }
-    
-    /* Services móvil */
+
+    /* Services */
     .services-header {
         padding: 80px 0 60px;
     }
-    
+
     .section-header {
         margin-bottom: 40px;
     }
-    
+
     .section-title {
         font-size: clamp(32px, 8vw, 42px);
     }
-    
+
     .service-item {
         grid-template-columns: 1fr;
         min-height: auto;
+        /* Mantener content-visibility en móvil también */
+        contain-intrinsic-size: 0 500px;
     }
-    
+
     .service-item.reverse .service-content {
         order: 1;
     }
-    
+
     .service-item.reverse .service-visual {
         order: 2;
     }
-    
+
     .service-content {
         padding: 48px 24px;
         min-height: auto;
     }
-    
+
     .service-visual {
         min-height: 350px;
+        /* Sin isolation extra en móvil */
+        isolation: auto;
+        contain: layout paint;
     }
-    
+
+    /* Quitar filtros costosos en GPU móvil */
+    .service-img {
+        filter: none;
+        will-change: auto;
+        transform: none;
+        transition: none;
+    }
+
+    .service-item:hover .service-img {
+        transform: none;
+        will-change: auto;
+    }
+
+    /* Overlay simplificado en móvil */
+    .service-overlay {
+        background: rgba(13, 148, 136, 0.3);
+        mix-blend-mode: normal;
+    }
+
     .service-number {
         font-size: 12px;
     }
-    
+
     .service-icon {
         width: 28px;
         height: 28px;
         margin-bottom: 16px;
     }
-    
+
     .service-content h3 {
         font-size: clamp(24px, 6vw, 28px);
     }
-    
+
     .service-content p {
         font-size: 15px;
         max-width: 100%;
     }
-    
-    /* Process móvil */
-    .process {
-        padding-top: 100px;
-        padding-bottom: 100px;
-    }
-    
-    .process::before,
-    .process::after {
-        height: 15px;
-        background-size: 30px 15px;
-    }
-    
-    .process-steps {
-        grid-template-columns: 1fr;
-        gap: 32px;
-        max-width: 100%;
-    }
-    
-    .process-steps::before {
-        display: none;
-    }
-    
-    .step-number {
-        width: 48px;
-        height: 48px;
-        font-size: 18px;
-    }
-    
-    /* About móvil */
-    .about .container {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .team-card {
-        padding: 20px;
-        flex-wrap: wrap;
-    }
-    
-    .team-portfolio-btn {
-        margin-left: 0;
-        margin-top: 12px;
-        width: 100%;
-        text-align: center;
-        /* Touch target */
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    /* Metrics móvil */
-    .metrics-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 0;
-    }
-    
-    .metric-block {
-        padding: 24px 16px;
-    }
-    
-    .metric-block:nth-child(2n)::after {
-        display: none;
-    }
-    
-    .metric-number {
-        font-size: 40px;
-    }
-    
-    .metric-label {
-        font-size: 10px;
-    }
-    
-    /* Systems móvil */
-    .systems-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-    
-    .system-card {
-        padding: 24px;
-    }
-    
-    /* Footer móvil */
-    .footer {
-        padding: 48px 0 24px;
-    }
-    
-    .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
-    }
-    
-    .footer-bottom {
-        flex-direction: column;
-        gap: 12px;
-        text-align: center;
-    }
-    
-    /* Scroll to top móvil */
-    .scroll-to-top {
-        bottom: 20px;
-        right: 20px;
-        width: 48px;
-        height: 48px;
-    }
-}
 
-/* Mobile Small - 480px */
-@media (max-width: 480px) {
-    .container {
-        padding: 0 20px;
-    }
-    
-    section {
-        padding: 60px 0;
-    }
-    
-    .hero-left {
-        padding: 24px 20px 40px;
-    }
-    
-    .hero-title {
-        font-size: clamp(32px, 11vw, 44px);
-    }
-    
-    .hero-subtitle {
-        font-size: 15px;
-    }
-    
-    .btn-primary,
-    .btn-ghost {
-        padding: 14px 24px;
-        font-size: 14px;
-    }
-    
-    .section-title {
-        font-size: clamp(28px, 9vw, 36px);
-    }
-    
-    .section-description {
-        font-size: 15px;
-    }
-    
-    .services-header {
-        padding: 60px 0 48px;
-    }
-    
-    .service-content {
-        padding: 40px 20px;
-    }
-    
-    .service-visual {
-        min-height: 300px;
-    }
-    
-    .service-content h3 {
-        font-size: clamp(22px, 6vw, 26px);
-    }
-    
-    .service-content p {
-        font-size: 14px;
-    }
-    
-    .process {
-        padding-top: 80px;
-        padding-bottom: 80px;
-    }
-    
-    .metric-number {
-        font-size: 32px;
-    }
-    
-    .navbar-cta {
-        padding: 8px 16px;
-        font-size: 12px;
-    }
-    
-    .tech-pill {
-        padding: 6px 12px;
-        font-size: 11px;
-    }
-}
-
-/* Touch device optimizations */
-@media (hover: none) and (pointer: coarse) {
-    /* Eliminar hover effects en touch devices */
-    .service-item:hover .service-img,
-    .system-card:hover,
-    .team-portfolio-btn:hover,
-    .btn-primary:hover,
-    .btn-ghost:hover {
-        transform: none;
-    }
-    
-    /* Asegurar touch targets mínimos */
-    a, button, .btn-primary, .btn-ghost, .navbar-cta {
-        min-height: 44px;
-        min-width: 44px;
-    }
-}
-
-/* Landscape mobile optimization */
-@media (max-width: 900px) and (orientation: landscape) {
-    .hero {
-        height: auto;
-        min-height: 100vh;
-    }
-    
-    .hero-left {
-        padding: 24px 32px 32px;
-    }
-    
-    section {
-        padding: 60px 0;
-    }
-}
-
-/* Fix global overflow móvil */
-@media (max-width: 768px) {
-    html, body {
-        overflow-x: hidden;
-        max-width: 100vw;
-    }
-    
-    .tech-marquee-wrapper {
-        max-width: 100vw;
-    }
-    
-    .hero,
-    .services,
-    .service-item,
-    .services-list {
-        max-width: 100vw;
-        overflow-x: hidden;
-    }
-}
-
-@media (max-width: 768px) {
-    /* Reemplazar animaciones laterales por vertical en móvil */
+    /* Animaciones laterales → verticales en móvil para evitar overflow */
     .reveal-left,
     .reveal-right {
         opacity: 0;
@@ -1800,36 +1587,232 @@ section {
     .reveal-right.visible {
         opacity: 1;
         transform: translateY(0);
+        will-change: auto;
+    }
+
+    /* Process */
+    .process {
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    .process::before,
+    .process::after {
+        height: 15px;
+        background-size: 30px 15px;
+    }
+
+    .process-steps {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        max-width: 100%;
+    }
+
+    .process-steps::before {
+        display: none;
+    }
+
+    .step-number {
+        width: 48px;
+        height: 48px;
+        font-size: 18px;
+    }
+
+    /* About */
+    .about .container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .team-card {
+        padding: 20px;
+        flex-wrap: wrap;
+    }
+
+    .team-portfolio-btn {
+        margin-left: 0;
+        margin-top: 12px;
+        width: 100%;
+        text-align: center;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Metrics */
+    .metrics-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+    }
+
+    .metric-block {
+        padding: 24px 16px;
+    }
+
+    .metric-block:nth-child(2n)::after {
+        display: none;
+    }
+
+    .metric-number {
+        font-size: 40px;
+    }
+
+    .metric-label {
+        font-size: 10px;
+    }
+
+    /* Systems */
+    .systems-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .system-card {
+        padding: 24px;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 48px 0 24px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+
+    /* Scroll to top */
+    .scroll-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 48px;
+        height: 48px;
     }
 }
 
 /* ═══════════════════════════════════════════
-   PERFORMANCE MÓVIL - SERVICES
+   RESPONSIVE - Mobile Small 480px
    ═══════════════════════════════════════════ */
-@media (max-width: 768px) {
-    .service-img {
-        filter: none;
-        will-change: auto;
-        transform: none;
-        transition: none;
+@media (max-width: 480px) {
+    .container {
+        padding: 0 20px;
     }
 
-    .service-item:hover .service-img {
-        transform: none;
+    section {
+        padding: 60px 0;
     }
 
-    .service-overlay {
-        background: rgba(13, 148, 136, 0.3);
-        mix-blend-mode: normal;
+    .hero-left {
+        padding: 24px 20px 40px;
+    }
+
+    .hero-title {
+        font-size: clamp(32px, 11vw, 44px);
+    }
+
+    .hero-subtitle {
+        font-size: 15px;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+        padding: 14px 24px;
+        font-size: 14px;
+    }
+
+    .section-title {
+        font-size: clamp(28px, 9vw, 36px);
+    }
+
+    .section-description {
+        font-size: 15px;
+    }
+
+    .services-header {
+        padding: 60px 0 48px;
+    }
+
+    .service-content {
+        padding: 40px 20px;
     }
 
     .service-visual {
-        isolation: auto;
-        contain: layout paint;
+        min-height: 300px;
     }
 
-    .service-item {
-        content-visibility: auto;
-        contain-intrinsic-size: 0 500px;
+    .service-content h3 {
+        font-size: clamp(22px, 6vw, 26px);
+    }
+
+    .service-content p {
+        font-size: 14px;
+    }
+
+    .process {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+
+    .metric-number {
+        font-size: 32px;
+    }
+
+    .navbar-cta {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+
+    .tech-pill {
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+}
+
+/* ═══════════════════════════════════════════
+   TOUCH DEVICE OPTIMIZATIONS
+   ═══════════════════════════════════════════ */
+@media (hover: none) and (pointer: coarse) {
+    .service-item:hover .service-img,
+    .system-card:hover,
+    .team-portfolio-btn:hover,
+    .btn-primary:hover,
+    .btn-ghost:hover {
+        transform: none;
+    }
+
+    a, button, .btn-primary, .btn-ghost, .navbar-cta {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* ═══════════════════════════════════════════
+   LANDSCAPE MOBILE OPTIMIZATION
+   ═══════════════════════════════════════════ */
+@media (max-width: 900px) and (orientation: landscape) {
+    .hero {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .hero-left {
+        padding: 24px 32px 32px;
+    }
+
+    section {
+        padding: 60px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        scroll-behavior: auto;
     }
 }
