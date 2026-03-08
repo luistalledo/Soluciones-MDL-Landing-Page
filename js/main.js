@@ -274,4 +274,29 @@
         counterObserver.observe(counter);
     });
 
+        // ═══════════════════════════════════════════
+    // SERVICE IMAGES — mostrar solo cuando carguen
+    // ═══════════════════════════════════════════
+    document.querySelectorAll('.service-img').forEach(img => {
+        // Ocultar overlay hasta que la imagen cargue
+        const visual = img.closest('.service-visual');
+        const overlay = visual?.querySelector('.service-overlay');
+
+        if (overlay) overlay.style.opacity = '0';
+
+        if (img.complete) {
+            if (overlay) overlay.style.opacity = '1';
+        } else {
+            img.style.opacity = '0';
+            img.addEventListener('load', () => {
+                img.style.transition = 'opacity 0.5s ease';
+                img.style.opacity = '1';
+                if (overlay) {
+                    overlay.style.transition = 'opacity 0.5s ease';
+                    overlay.style.opacity = '1';
+                }
+            }, { once: true });
+        }
+    });
+
 })();
