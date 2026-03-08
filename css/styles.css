@@ -1802,3 +1802,34 @@ section {
         transform: translateY(0);
     }
 }
+
+/* ═══════════════════════════════════════════
+   PERFORMANCE MÓVIL - SERVICES
+   ═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+    .service-img {
+        filter: none;
+        will-change: auto;
+        transform: none;
+        transition: none;
+    }
+
+    .service-item:hover .service-img {
+        transform: none;
+    }
+
+    .service-overlay {
+        background: rgba(13, 148, 136, 0.3);
+        mix-blend-mode: normal;
+    }
+
+    .service-visual {
+        isolation: auto;
+        contain: layout paint;
+    }
+
+    .service-item {
+        content-visibility: auto;
+        contain-intrinsic-size: 0 500px;
+    }
+}
