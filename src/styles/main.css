@@ -1,0 +1,57 @@
+/* ═══════════════════════════════════════════════════════════════
+   NELVOX - MODULAR STYLESHEET
+   ═══════════════════════════════════════════════════════════════
+   
+   This is the main CSS file that imports all modular stylesheets.
+   Each component is isolated and maintainable.
+   
+   Import Order:
+   1. Themes (CSS Variables)
+   2. Base (Reset, Typography, Layout)
+   3. Components (Navbar, Hero, Services, etc.)
+   4. Animations
+   5. Responsive (Media Queries)
+*/
+
+/* ═══════════════════════════════════════════
+   THEME - CSS VARIABLES
+   ═══════════════════════════════════════════ */
+@import url('./themes/light.css');
+
+/* ═══════════════════════════════════════════
+   BASE STYLES - RESET, TYPOGRAPHY, LAYOUT
+   ═══════════════════════════════════════════ */
+@import url('./base/reset.css');
+@import url('./base/typography.css');
+@import url('./layout/container.css');
+
+/* ═══════════════════════════════════════════
+   COMPONENTS - PAGE SECTIONS
+   ═══════════════════════════════════════════ */
+@import url('./components/buttons.css');
+@import url('./components/navbar.css');
+@import url('./components/hero.css');
+@import url('./components/carousel.css');
+@import url('./components/tech-strip.css');
+@import url('./components/services.css');
+@import url('./components/process.css');
+@import url('./components/about.css');
+@import url('./components/metrics.css');
+@import url('./components/systems.css');
+@import url('./components/cta.css');
+@import url('./components/footer.css');
+@import url('./components/scroll-top.css');
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════ */
+@import url('./animations/reveal.css');
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE - MEDIA QUERIES
+   ═══════════════════════════════════════════ */
+@import url('./utilities/responsive.css');
+
+/* ═══════════════════════════════════════════
+   Main Stylesheet End
+   ═══════════════════════════════════════════ */

@@ -1,52 +1,161 @@
-# MLD Soluciones - Landing Page
+# NELVOX Landing Page
 
-Landing page profesional para MLD Soluciones, empresa de consultoría tecnológica, desarrollo de software y automatización.
+Sitio web profesional de NELVOX - Consultoría Tecnológica, Desarrollo de Software y Automatización.
 
-## Equipo
+## 🏗️ Arquitectura Modular
 
-- **Luis Talledo** - Arquitectura & Backend
-- **Mauricio Terrones** - Estrategia & Desarrollo
-- **Diego Villajulca** - Automatización & AI
-- **Jeamir Quispe** - Frontend & UX
+Este proyecto implementa **principios SOLID y Clean Code** para una arquitectura escalable y mantenible.
 
-## Estructura del Proyecto
+### JavaScript Modular
+| Componente | Responsabilidad |
+|-----------|---|
+| `CarouselController` | Rotación automática hero |
+| `NavbarController` | Scroll effects |
+| `RevealObserver` | Animaciones scroll |
+| `ScrollTopButton` | Botón subir |
+| `CounterAnimation` | Contadores animados |
 
-```
-Soluciones-MDL-Landing-Page/
-│
-├── index.html              # Sitio web principal
-│
-├── css/
-│   └── styles.css          # Hoja de estilos completa
-│
-├── js/
-│   └── main.js             # JavaScript principal
-│
-├── img/                    # Imágenes del sitio
-│   ├── logo.png
-│   ├── fondo.png
-│   ├── mistica-imagen.PNG
-│   ├── myd.PNG
-│   ├── consultoriatecnologia.png
-│   ├── desarrolloweb.png
-│   ├── transformaciondigital.jpg
-│   ├── seccion1.png
-│   ├── seccion2.png
-│   └── seccion3.png
-│
-├── LICENSE
-└── README.md
+### CSS Modular
+- **17 archivos** organizados por secciones
+- Variables CSS centralizadas
+- Componentes aislados
+- Media queries en archivo separado
+
+### Imágenes Optimizadas
+- Formato **WebP** (80% más ligero)
+- Originales en `img/originals/`
+
+## 🚀 Primeros Pasos
+
+```bash
+# Solo para desarrollo (habilita optimización de imágenes)
+npm install
+
+# Abrir con Live Server
+# Clic derecho en index.html → "Open with Live Server"
 ```
 
-## Características
+## 📦 Archivos a Subir
 
-### Características
+```
+✅ index.html
+✅ src/               (JavaScript + CSS modular)
+✅ img/*.webp        (Imágenes optimizadas)
+✅ img/NELVOX/       (Logos SVG)
+✅ js/lenis.min.js   (Smooth scroll)
+✅ README.md         (Este archivo)
+✅ LICENSE
 
-- **Diseño moderno**: Minimalismo futurista inspirado en Vercel, Linear y Stripe
-- **Performance optimizada**: CSS y JS separados para mejor caching
-- **Responsive**: Adaptable a todos los dispositivos
-- **Animaciones suaves**: CSS puro, sin dependencias externas
-- **SEO optimizado**: Estructura semántica HTML5
+❌ node_modules/     (git ignore)
+❌ package.json      (git ignore)
+❌ optimize-images.js (git ignore)
+❌ Análisis*.md      (git ignore)
+```
+
+## 🎯 Estructura Completa
+
+```
+src/
+├── app.js                     # Orquestador (140 líneas)
+├── constants.js              # Configuración global (60 líneas)
+├── components/
+│   ├── carousel/carousel.js   (152 líneas)
+│   ├── navbar/navbar.js       (98 líneas)
+│   ├── reveal/reveal.js       (110 líneas)
+│   ├── scroll-top/scroll-top.js (115 líneas)
+│   └── counter/counter.js     (95 líneas)
+├── services/
+│   └── logger.js              # Logging centralizado
+├── utils/
+│   ├── throttle.js
+│   ├── debounce.js
+│   ├── raf-animator.js
+│   └── dom-helpers.js
+└── styles/
+    ├── main.css               # Punto de entrada
+    ├── themes/light.css       # Variables
+    ├── base/                  # Reset, tipografía
+    ├── layout/                # Containers
+    ├── components/            # Navbar, Hero, Services, etc (13 archivos)
+    ├── animations/            # Reveal animations
+    └── utilities/responsive.css
+```
+
+## ✨ Características
+
+- ✅ **Modular**: Cada componente es independiente
+- ✅ **SOLID**: Single Responsibility, Open/Closed, etc.
+- ✅ **Clean Code**: Nombres significativos, funciones pequeñas
+- ✅ **Optimizado**: Imágenes WebP, lazy loading ready
+- ✅ **Responsive**: Breakpoints 1200px, 1024px, 768px, 480px
+- ✅ **Animaciones**: Scroll reveal, smooth transitions
+- ✅ **Performance**: 60-150 líneas por archivo vs 2000 líneas monolítico
+
+## 🔧 Desarrollo
+
+### Agregar un Nuevo Componente
+
+1. Crear `src/components/[nombre]/[nombre].js`
+2. Exportar clase con `init()` y `destroy()`
+3. Registrar en `src/app.js`
+4. Crear estilos en `src/styles/components/[nombre].css`
+5. Importar en `src/styles/main.css`
+
+### Optimizar Imágenes
+
+```bash
+npm run optimize-images
+```
+
+## 📊 Estadísticas
+
+| Métrica | Antes | Después |
+|---------|-------|---------|
+| Archivos JS | 1 | 16 |
+| Líneas monolítico | 500+ | 60-150 c/u |
+| Tamaño imágenes | 12.4 MB | 2.6 MB |
+| Reducción total | - | **79%** |
+
+## 🎓 Principios Aplicados
+
+- **SOLID**: Single Responsibility, Open/Closed, Liskov, Interface, Dependency Inversion
+- **DRY**: Don't Repeat Yourself
+- **KISS**: Keep It Simple, Stupid
+- **Yagni**: You Aren't Gonna Need It
+
+## 📝 Ejemplo de Componente Modular
+
+```javascript
+export class MyComponent {
+  constructor(selector, config = {}) {
+    this.element = document.querySelector(selector);
+    this.config = { ...DEFAULT_CONFIG, ...config };
+  }
+
+  init() {
+    if (!this.element) return;
+    this.bindEvents();
+    Logger.info('MyComponent initialized');
+  }
+
+  bindEvents() {
+    // Lógica específica
+  }
+
+  destroy() {
+    // Limpiar
+    Logger.info('MyComponent destroyed');
+  }
+}
+```
+
+---
+
+**Versión:** 2.0.0  
+**Status:** Producción  
+**Última actualización:** Abril 2026
+
+Para soporte técnico, revisar `REFACTORING_COMPLETE.md` en la rama de desarrollo.
 
 ### Tecnologías Utilizadas
 

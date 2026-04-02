@@ -1,0 +1,51 @@
+# Dependencies
+node_modules/
+package-lock.json
+package.json
+npm-debug.log*
+yarn.lock
+
+# Build files
+dist/
+build/
+*.tsbuildinfo
+
+# Development tools
+optimize-images.js
+*.log
+
+# Documentation (análisis y documentación automática - NO subir)
+ANALISIS_ARQUITECTURA.md
+EJEMPLOS_REFACTORIZACION.md
+PLAN_IMPLEMENTACION.md
+REFACTORING_COMPLETE.md
+QUICK_REFERENCE.md
+EXECUTION_SUMMARY.md
+CSS_MODULARIZATION.md
+RESPONSIVE_AUDIT.md
+
+# OS files
+.DS_Store
+Thumbs.db
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Backups
+*.backup
+*.old
+*.bak
+
+# Test coverage
+coverage/
+.nyc_output/

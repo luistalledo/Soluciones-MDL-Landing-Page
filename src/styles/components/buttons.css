@@ -1,0 +1,46 @@
+/* ═══════════════════════════════════════════
+   BOTONES
+   ═══════════════════════════════════════════ */
+
+.btn-primary {
+    padding: 14px 32px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color var(--transition-default), 
+                box-shadow var(--transition-default), 
+                transform var(--transition-default);
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background: #009688;
+    box-shadow: 0 0 20px rgba(0, 180, 160, 0.25);
+    transform: translateY(-1px);
+}
+
+.btn-ghost {
+    padding: 14px 32px;
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color var(--transition-default), 
+                color var(--transition-default), 
+                border-color var(--transition-default);
+    display: inline-block;
+}
+
+.btn-ghost:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}

@@ -1,0 +1,128 @@
+/* ═══════════════════════════════════════════
+   PROCESS SECTION STYLES
+   ═══════════════════════════════════════════ */
+
+.process {
+    background: #D9F5F2;
+    text-align: center;
+    position: relative;
+    padding-top: 140px;
+    padding-bottom: 140px;
+}
+
+.process::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='20' viewBox='0 0 40 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L20 20 L40 0 Z' fill='%23f8fafb'/%3E%3C/svg%3E");
+    background-size: 40px 20px;
+    background-repeat: repeat-x;
+    z-index: 2;
+}
+
+.process::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='20' viewBox='0 0 40 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 20 L20 0 L40 20 Z' fill='%23f8fafb'/%3E%3C/svg%3E");
+    background-size: 40px 20px;
+    background-repeat: repeat-x;
+    z-index: 2;
+}
+
+.process .container {
+    position: relative;
+    z-index: 1;
+}
+
+.process .container::before {
+    content: '';
+    position: absolute;
+    top: -140px;
+    left: -60px;
+    right: -60px;
+    bottom: -140px;
+    background-image: radial-gradient(circle, rgba(13, 91, 85, 0.08) 2px, transparent 2px);
+    background-size: 28px 28px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.process .section-header {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.process .section-tag {
+    background: rgba(255, 255, 255, 0.4);
+    color: #047A6F;
+}
+
+.process .section-title {
+    color: #0D5B55;
+}
+
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 48px;
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.process-steps::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    border-top: 2px dashed rgba(13, 91, 85, 0.25);
+    z-index: 0;
+}
+
+.process-step {
+    position: relative;
+    z-index: 1;
+}
+
+.step-number {
+    width: 56px;
+    height: 56px;
+    border: 2px solid #047A6F;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #047A6F;
+    background: white;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+}
+
+.step-number:hover {
+    background: #00B4A0;
+    color: white;
+    border-color: #00B4A0;
+}
+
+.process-step h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #0D5B55;
+}
+
+.process-step p {
+    font-size: 13px;
+    color: #2A7470;
+}

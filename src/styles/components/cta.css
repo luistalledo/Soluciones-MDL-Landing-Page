@@ -1,0 +1,53 @@
+/* ═══════════════════════════════════════════
+   CTA SECTION STYLES
+   ═══════════════════════════════════════════ */
+
+.final-cta {
+    background: var(--ink);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.final-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 40%;
+    background: radial-gradient(ellipse 50% 100% at 50% 0%, rgba(0, 180, 160, 0.15), transparent);
+    pointer-events: none;
+}
+
+.final-cta .section-tag {
+    color: var(--accent);
+}
+
+.final-cta .section-title {
+    color: white;
+    font-size: clamp(42px, 6vw, 64px);
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.final-cta .section-description {
+    color: var(--muted);
+    max-width: 500px;
+    margin: 0 auto 40px;
+}
+
+.final-cta .hero-cta-group {
+    justify-content: center;
+    margin-bottom: 0;
+}
+
+.final-cta .btn-ghost {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+.final-cta .btn-ghost:hover {
+    border-color: white;
+}
